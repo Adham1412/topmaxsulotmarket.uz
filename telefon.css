@@ -1,0 +1,186 @@
+/* Body styling */
+body {
+  font-family: Arial, sans-serif; /* Sayt shriftini belgilaydi */
+  background: #f7f7fb; /* Orqa fon rangi */
+  margin: 0; /* Standart bo'sh joyni olib tashlaydi */
+  padding: 20px; /* Sahifa chetiga ichki bo'sh joy beradi */
+}
+
+/* Mahsulotlar grid joylashuvi */
+.telefon-wrapper {
+  display: grid; /* Kartalarni grid shaklida joylashtiradi */
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /* Har bir karta minimal 240px bo‘ladi va joyga qarab avtomatik joylashadi */
+  gap: 20px; /* Kartalar orasidagi masofa */
+}
+
+/* Har bir mahsulot kartasi */
+.telefon {
+  background: #fff; /* Karta foni oq rang */
+  padding: 12px; /* Ichki bo‘sh joy */
+  border-radius: 14px; /* Qirralarni yumaloqlash */
+  box-shadow: 0 0 10px rgba(0,0,0,0.08); /* Yengil soyali effekt */
+  text-align: left; /* Matnni chapga tekislash */
+  transition: .2s; /* Hoverdagi animatsiya silliqligi */
+}
+
+/* Hover effekti */
+.telefon:hover {
+  transform: scale(1.02); /* Karta kattalashadi */
+}
+
+/* Rasm uslubi */
+.telefon img {
+  width: 100%; /* Rasm kengligi kartaga moslashadi */
+  height: 250px; /* Rasm balandligi */
+  object-fit: cover; /* Rasm proporsiyasini buzmasdan joylashtiradi */
+  border-radius: 12px; /* Rasm burchaklarini yumaloqlash */
+}
+
+/* Mahsulot nomi */
+h4 {
+  font-size: 16px; /* Matn o‘lchami */
+  margin: 8px 0; /* Yuqori va pastga bo‘sh joy */
+}
+
+/* Narx dizayni */
+.price {
+  font-size: 17px; /* Matn o‘lchami */
+  font-weight: bold; /* Qalin matn */
+  color: #4b00ff; /* Narx rangi */
+}
+
+/* Tugma dizayni */
+button {
+  width: 100%; /* Tugma kartaga mos kenglikda */
+  padding: 10px; /* Ichki bo‘sh joy */
+  background: #025effda; /* Tugma foni */
+  border: none; /* Chegara yo‘q */
+  color: #fff; /* Matn rangi oq */
+  border-radius: 10px; /* Burchaklar yumaloq */
+  font-size: 14px; /* Tugma matni o‘lchami */
+  cursor: pointer; /* Sichqoncha bosganda pointer paydo bo‘ladi */
+  transition: .2s; /* Animatsiya */
+}
+
+/* Tugma hover effekti */
+button:hover {
+  background: #002b99; /* Tugma rangi o‘zgaradi */
+  transform: scale(1.05); /* Tugma kattalashadi */
+
+}
+
+/* Header styles */
+header {
+  background: rgba(255, 255, 255, 0.1); /* Yarim shaffof oq fon */
+  backdrop-filter: blur(12px); /* Orqa fonni xiralashtirish */
+  -webkit-backdrop-filter: blur(12px); /* Safari uchun */
+  padding: 15px 40px; /* Header ichki bo‘sh joy */
+  position: sticky; /* Yuqoriga yopishadi */
+  top: 0; /* Ekran tepasida joylashadi */
+  z-index: 100; /* Boshqa elementlardan ustun turadi */
+  display: flex; /* Elementlarni yonma-yon joylashtiradi */
+  justify-content: space-between; /* O‘rtada masofa bo‘ladi */
+  align-items: center; /* Elementlarni vertikal markazlaydi */
+  border-radius: 16px; /* Header burchaklarini yumaloqlash */
+  margin: 15px; /* Tashqi bo‘sh joy */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3); /* Header ostida soyali effekt */
+}
+
+/* Menu listi */
+header ul {
+  list-style: none; /* Ro‘yxat belgisini olib tashlaydi */
+  display: flex; /* Yonma-yon joylashadi */
+  margin: 5px; 
+  padding: 5px; 
+  
+}
+
+/* Menu elementlari oralig‘i */
+header ul li {
+  margin-left: 20px; /* Menular orasida bo‘sh joy */
+}
+
+/* Linklar dizayni */
+header ul li a {
+  color: #000000; /* Matn rangi qora */
+  text-decoration: none; /* Tagini chizmaydi */
+  font-weight: bold; /* Qalin matn */
+  transition: all 0.3s ease; /* Hover animatsiyasi */
+}
+
+/* Link hover effekti */
+header ul li a:hover {
+  color: #ffb703; /* Sariq rangga o‘zgaradi */
+  text-shadow: 0 0 10px #ffb703; /* Yorqin effekt beradi */
+}
+/* === Responsive bo'lim — ekran o'lchamiga moslashuvni ta'minlaydi === */
+
+/* Planshetlar (768px gacha) */
+@media (max-width: 768px) {
+
+  body {
+    padding: 10px; /* Kichik ekrandagi bo'sh joyni optimallashtiradi */
+  }
+
+  header {
+    padding: 12px 20px; /* Header ichki bo'shlig'ini moslaydi */
+    margin: 10px; /* Tashqi bo'shliqni kamaytiradi */
+  }
+
+  .telefon-wrapper {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Kartalar soni mos ravishda kamayadi */
+    gap: 15px; /* Kartalar orasidagi masofa ixchamlashtiriladi */
+  }
+
+  .telefon img {
+    height: 220px; /* Rasm balandligi moslashtiriladi */
+  }
+
+  h4 {
+    font-size: 15px; /* Sarlavha shriftini kichraytiradi */
+  }
+
+  button {
+    font-size: 13px; /* Tugma matni kichikroq bo'ladi */
+    padding: 9px; /* Tugma balandligini moslaydi */
+  }
+}
+
+/* Telefonlar (480px gacha) */
+@media (max-width: 480px) {
+
+  header {
+    flex-direction: column; /* Header elementlar bir ustun bo'lib joylashadi */
+    gap: 10px; /* Oraliq masofa */
+    padding: 10px 15px; /* Ichki padding kichraytiriladi */
+  }
+
+  header ul {
+    flex-direction: row; /* Menu yonma-yon bo'ladi */
+    flex-wrap: wrap; /* Joy yetmasa qator bo'yicha davom etadi */
+    justify-content: center; /* Menu markazga joylashadi */
+    gap: 10px; /* Menu elementlari orasidagi masofa */
+  }
+
+  header ul li {
+    margin: 0; /* Default margin olib tashlanadi */
+  }
+
+  .telefon-wrapper {
+    grid-template-columns: 1fr; /* Har qatorga bitta mahsulot kartasi */
+    gap: 12px; /* Masofa kichikroq */
+  }
+
+  .telefon img {
+    height: 200px; /* Rasm balandligi mobilga moslashtiriladi */
+  }
+
+  h4 {
+    font-size: 14px; /* Matn kichikroq bo'ladi */
+  }
+
+  button {
+    font-size: 13px; /* Tugma matn o'lchami */
+    padding: 8px; /* Tugma balandligi mos holatda bo'ladi */
+  }
+}

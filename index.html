@@ -1,0 +1,189 @@
+<!DOCTYPE html> <!-- Bu hujjat HTML5 formatida yozilganini bildiradi -->
+<html lang="uz"> <!-- Butun hujjat O'zbek tilida ekanligini belgilaydi -->
+<head>
+  <meta charset="UTF-8"> <!-- Sahifada ishlatiladigan belgilar kodlash turini UTF-8 ga o‘rnatadi -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Saytni barcha qurilmalarga (mobil, planshet, kompyuter) moslashtiradi -->
+  <title>TopMaxsulotMarket</title> <!-- Brauzer oynasida chiqadigan sarlavha -->
+  <link rel="stylesheet" href="index.css"> <!-- Tashqi CSS faylni ulamoqda -->
+</head>
+
+<body>
+  <!-- === NAVIGATSIYA MENYUSI === -->
+  <header> <!-- Sahifaning yuqori qismi: logotip va menyular joylashgan -->
+    <div class="logo"> <!-- Logotip joylashadigan joy -->
+      <img src="logo.png" alt="TopMaxsulotMarket Logotip" width="300"> <!-- Logotip rasmi -->
+    </div>
+    
+    <nav> <!-- Saytning asosiy menyusi -->
+      <ul> <!-- Menyu elementlari ro‘yxati -->
+        <li><a href="index.html">🏠 Bosh sahifa</a></li> <!-- Asosiy sahifaga o'tish havolasi -->
+        <li><a href="katalog.html">☰ Mahsulotlar katalogi</a></li> <!-- Katalog sahifasiga o'tish -->
+        <li><a href="savat.html">🛒Savat</a></li> <!-- Savat (tanlangan mahsulotlar) sahifasiga o'tish -->
+        <li><a href="login.html">👤Kirish</a></li> <!-- Foydalanuvchi kirish sahifasiga o'tish -->
+      </ul>
+    </nav>
+  </header>
+
+  <!-- === BANNER QISMI === -->
+  <section class="banner"> <!-- Saytning e’tiborli reklamasi yoki boshlang‘ich banner -->
+    <h1>TopMaxsulotMarketga xush kelibsiz!</h1> <!-- Asosiy sarlavha -->
+    <p>Eng yaxshi mahsulotlarni qulay narxlarda xarid qiling.</p> <!-- Banner osti matni -->
+    <a href="katalog.html" class="btn">Xaridni boshlash</a> <!-- Katalog sahifasiga olib boradigan tugma -->
+  </section>
+
+  <!-- === KO‘P SOTILGAN MAHSULOTLAR BO‘LIMI === -->
+  <section class="products"> <!-- Mahsulotlar joylashadigan qism -->
+    <h2>Ko‘p sotilgan mahsulotlar</h2> <!-- Bo‘lim sarlavhasi -->
+    
+    <div class="product-grid"> <!-- Mahsulot kartalarini joylashtirish uchun tarmoq konteyner -->
+      
+      <!-- 1-MAHSULOT -->
+      <div class="product-card"> <!-- Mahsulot kartasi -->
+        <img src="https://www.pngplay.com/wp-content/uploads/12/Smartphone-PNG-Free-File-Download.png" alt="Telefon"> <!-- Mahsulot rasmi -->
+        <h3>Smartfon</h3> <!-- Mahsulot nomi -->
+        <p>3 200 000 so‘m</p> <!-- Narxi -->
+        <button class="add-to-cart btm"
+          data-id="1"
+          data-title="Smartfon"
+          data-img="https://www.pngplay.com/wp-content/uploads/12/Smartphone-PNG-Free-File-Download.png"
+          data-price="3200000">
+          Savatga qo‘shish
+        </button> <!-- Savatga qo‘shish tugmasi -->
+      </div>
+
+      <!-- 2-MAHSULOT -->
+      <div class="product-card">
+        <img src="https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/dell-plus/db16255/media-gallery/non-touch/laptop-dell-plus-db16255nt-ice-bl-fpr-gallery-5.psd?fmt=png-alpha&pscan=auto&scl=1&hei=804&wid=979&qlt=100,1&resMode=sharp2&size=979,804&chrss=full" alt="Laptop">
+        <h3>Laptop</h3>
+        <p>7 500 000 so‘m</p>
+        <button class="add-to-cart btm"
+          data-id="2"
+          data-title="Laptop"
+          data-img="https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/dell-plus/db16255/media-gallery/non-touch/laptop-dell-plus-db16255nt-ice-bl-fpr-gallery-5.psd?fmt=png-alpha&pscan=auto&scl=1&hei=804&wid=979&qlt=100,1&resMode=sharp2&size=979,804&chrss=full"
+          data-price="7500000">
+          Savatga qo‘shish
+        </button>
+      </div>
+
+      <!-- 3-MAHSULOT -->
+      <div class="product-card">
+        <img src="https://pngicon.ru/file/uploads/naushniki.png" alt="Naushnik">
+        <h3>Naushnik</h3>
+        <p>450 000 so‘m</p>
+        <button class="add-to-cart btm"
+          data-id="3"
+          data-title="Naushnik"
+          data-img="https://pngicon.ru/file/uploads/naushniki.png"
+          data-price="450000">
+          Savatga qo‘shish
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- === QIDIRUV FUNKSIYASI UCHUN SCRIPT === -->
+  <script>
+  const sahifalar = [
+    { sarlavha: "Bosh sahifa", matn: "Saytning asosiy sahifasi haqida ma’lumot", link: "index.html" },
+    { sarlavha: "Katalog", matn: "Mahsulotlar ro‘yxati va narxlari", link: "katalog.html" },
+    { sarlavha: "Savat", matn: "Tanlangan mahsulotlar saqlanadigan sahifa", link: "savat.html" },
+    { sarlavha: "Kirish", matn: "Foydalanuvchi tizimga kirish sahifasi", link: "login.html" },
+    { sarlavha: "Ro‘yxatdan o‘tish", matn: "Yangi foydalanuvchi uchun ro‘yxatdan o‘tish sahifasi", link: "register.html" }
+  ];
+
+  // Qidiruv maydoniga yozilganda ishlovchi hodisa
+  document.getElementById("qidiruv").addEventListener("input", function() {
+    let sorov = this.value.toLowerCase(); // foydalanuvchi yozgan matn
+    let natijaDiv = document.getElementById("natijalar"); // natijalar chiqadigan joy
+    natijaDiv.innerHTML = ""; // avvalgi natijalarni tozalaydi
+
+    if (sorov.length > 0) { // agar yozilgan bo‘lsa
+      let natijalar = sahifalar.filter(s => 
+        s.sarlavha.toLowerCase().includes(sorov) || 
+        s.matn.toLowerCase().includes(sorov)
+      );
+
+      if (natijalar.length === 0) {
+        natijaDiv.innerHTML = "<p>Natija topilmadi.</p>"; // hech narsa topilmasa
+      } else {
+        // Har bir topilgan natijani chiqaradi
+        natijalar.forEach(n => {
+          natijaDiv.innerHTML += `
+            <div style="padding:10px; border:1px solid #ddd; margin:5px 0; border-radius:5px;">
+              <a href="${n.link}" style="font-weight:bold; text-decoration:none; color:#0077b6;">
+                ${n.sarlavha}
+              </a><br>
+              <small>${n.matn}</small>
+            </div>`;
+        });
+      }
+    }
+  });
+  </script>
+
+  <!-- === SAVATGA QO‘SHISH FUNKSIYASI === -->
+  <script>
+  let cart = JSON.parse(localStorage.getItem('cart_v1')) || []; 
+  // localStorage'dan saqlangan savatni oladi (agar yo‘q bo‘lsa — bo‘sh massiv yaratadi)
+
+  // Har bir “Savatga qo‘shish” tugmasiga bosilganda ishlaydi
+  document.querySelectorAll('.add-to-cart').forEach(btn=>{
+    btn.addEventListener('click', function(e){
+      e.preventDefault(); // Sahifa qayta yuklanmasin
+
+      const item = { // Yangi mahsulot obyektini tuzadi
+        id: this.dataset.id,
+        title: this.dataset.title,
+        img: this.dataset.img,
+        price: Number(this.dataset.price),
+        qty: 1 // boshlang‘ich miqdor
+      };
+
+      // Agar mahsulot avvaldan savatda bo‘lsa — sonini oshiradi
+      let exist = cart.find(p => p.id === item.id);
+      if (exist) {
+        exist.qty++;
+      } else {
+        cart.push(item);
+      }
+
+      // Yangilangan savatni localStorage'ga yozadi
+      localStorage.setItem('cart_v1', JSON.stringify(cart));
+      
+      alert("✅ Mahsulot savatga qo'shildi!"); // Foydalanuvchiga xabar beradi
+      window.location.href = "savat.html"; // Savat sahifasiga o'tadi
+    });
+  });
+  </script>
+
+
+  <!--  === PASTKI O‘NG BURCHAKDA TELEGRAM VA INSTAGRAM IKONKALARI === -->
+    <!-- === HTML QISMI === -->
+  <div class="social-float">
+  <!--  Telegram tugmasi -->
+  <a class="sf-btn telegram" href="https://t.me/topmaxsulotmarket" target="_blank" rel="noopener noreferrer">
+    <!-- Telegram SVG ikonkasi -->
+    <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+      <path d="M120 0C53.7 0 0 53.7 0 120s53.7 120 120 120 120-53.7 120-120S186.3 0 120 0zm55.3 78.9l-18.7 88.4c-1.4 6.3-5.1 7.8-10.3 4.9l-28.5-21.1-13.7 13.2c-1.5 1.5-2.8 2.8-5.7 2.8l2-28.5 51.9-46.9c2.2-2 0.3-3.1-3.4-1.1L83.2 129.6 55.6 116.7c-6.1-2.2-6.2-6.1 1.3-9.1l98.4-37.9c4.6-1.7 8.6 1.1 6.4 9.2z"/>
+    </svg>
+    <span class="tooltip">Telegram</span> <!-- Ustiga olib borganda "Telegram" yozuvi chiqadi -->
+  </a>
+
+  <!--  Instagram tugmasi -->
+  <a class="sf-btn instagram" href="https://instagram.com/yourusername" target="_blank" rel="noopener noreferrer">
+    <!-- Instagram SVG ikonkasi -->
+    <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+      <path d="M349.33 69.33H162.67C109.05 69.33 64 114.38 64 168v181.33C64 397.62 109.05 442.67 162.67 442.67h186.67C402.95 442.67 448 397.62 448 349.33V168c0-53.62-45.05-98.67-98.67-98.67zM256 346.67c-50.24 0-90.67-40.43-90.67-90.67S205.76 165.33 256 165.33 346.67 205.76 346.67 256 306.24 346.67 256 346.67zm101.33-176c-11.78 0-21.33-9.55-21.33-21.33s9.55-21.33 21.33-21.33 21.33 9.55 21.33 21.33-9.55 21.33-21.33 21.33zM384 349.33c0 36.72-29.79 66.67-66.67 66.67H194.67c-36.88 0-66.67-29.95-66.67-66.67V168c0-36.88 29.79-66.67 66.67-66.67h122.67C354.21 101.33 384 131.12 384 168v181.33z"/>
+    </svg>
+    <span class="tooltip">Instagram</span> <!-- Ustiga olib borganda "Instagram" yozuvi chiqadi -->
+  </a>
+  </div>
+
+ <!-- === PASTKI QISM (FOOTER) === -->
+  <footer> <!-- Sayt pastki qismi -->
+    <p>&copy; 2025 TopMaxsulotMarket. Barcha huquqlar himoyalangan.</p> <!-- Mualliflik huquqi yozuvi -->
+  </footer>
+</body>
+</html>

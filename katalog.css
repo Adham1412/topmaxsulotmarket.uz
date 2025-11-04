@@ -1,0 +1,297 @@
+/* BODY STYLES */
+body:after {
+  content: ""; /* Qo‘shimcha qatlam yaratish */
+  position: fixed; /* Qatlam ekranga mahkamlanadi */
+  top: 0;
+  left: 0;
+  width: 100%; /* Butun ekran bo‘ylab */
+  height: 100%;
+  background: rgba(0, 0, 0, 0.07); /* Yengil qoraytirish */
+  z-index: -1; /* Asosiy elementlar ustiga chiqmaydi */
+}
+
+/* ====== Header (Sahifa yuqori menyusi) ====== */
+header {
+  background: rgba(255, 255, 255, 0.1); /* Shaffof oq fon */
+  backdrop-filter: blur(12px); /* Xiralik effekti */
+  -webkit-backdrop-filter: blur(12px); /* Safari uchun mos */
+  padding: 15px 40px; /* Ichki bo‘sh joy */
+  position: sticky; /* Yuqoriga yopishadi */
+  top: 0; /* Ekran tepasida joylashadi */
+  z-index: 100; /* Boshqa elementlardan ustun turadi */
+  display: flex; /* Flex tartibda joylashadi */
+  justify-content: space-between; /* Logotip va menyu orasini teng ajratadi */
+  align-items: center; /* Vertikal markazlashtiradi */
+  border-radius: 16px; /* Yumaloq burchaklar */
+  margin: 15px; /* Tashqi bo‘sh joy */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3); /* Soya effekti */
+}
+
+/* Navigatsiya ro‘yxati */
+header ul {
+  list-style: none; /* Belgilarni olib tashlaydi */
+  display: flex; /* Elementlarni yonma-yon joylashtiradi */
+  margin: 0;
+  padding: 0;
+}
+
+/* Menyu elementlarining orasi */
+header ul li {
+  margin-left: 20px;
+}
+
+/* Havolalarning dizayni */
+header ul li a {
+  color: #000000; /* Oq rang */
+  text-decoration: none; /* Tag chizig‘ini olib tashlash */
+  font-weight: bold; /* Qalin matn */
+  transition: all 0.3s ease; /* Yumshoq o‘tish effekti */
+}
+
+/* Hover effekti (sichqoncha olib borilganda) */
+header ul li a:hover {
+  color: #ffb703; /* Sariq rang */
+  text-shadow: 0 0 10px #ffb703; /* Yorqin effekt */
+}
+
+
+/* ===== ASOSIY QISM (MAIN) ===== */
+.main {
+  display: flex; /* Yonma-yon joylashuv */
+  gap: 30px;
+  padding: 30px 40px;
+}
+
+/* ===== SIDEBAR (chapdagi menyu) ===== */
+.sidebar {
+  width: 260px; /* Yon panel kengligi */
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  padding: 20px;
+  position: sticky; /* Yuqoriga yopishadi */
+  top: 150px; /* Ekran tepasidan masofa */
+  height: fit-content; /* Balansli balandlik */
+}
+
+.sidebar h2 {
+  font-size: 18px;
+  color: #4A3AFF;
+  margin-bottom: 15px;
+}
+
+/* Kategoriya ro‘yxati */
+.category-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Har bir kategoriya elementi */
+.category-item {
+  margin-bottom: 10px;
+}
+
+/* Kategoriya tugmalari */
+.category-btn {
+  width: 100%;
+  border: none;
+  background: #f9f9ff; /* Orqa fon */
+  padding: 10px 12px;
+  font-size: 15px;
+  border-radius: 8px;
+  text-align: left;
+  color: #333;
+  cursor: pointer;
+  transition: 0.2s; /* Effekt o‘tish tezligi */
+}
+
+.category-btn:hover {
+  background: #e9e9ff;
+  color: #4A3AFF;
+}
+
+/* Pastki subkategoriya menyulari */
+.subcategory {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 15px; /* Chapdan oraliq */
+  display: none; /* Dastlab yashirilgan */
+}
+
+.subcategory.open {
+  display: block; /* JavaScript orqali ochiladi */
+  animation: fadeIn 0.3s ease; /* Ochilish animatsiyasi */
+}
+
+.subcategory li {
+  margin: 6px 0;
+}
+
+.subcategory a {
+  text-decoration: none;
+  color: #555;
+  font-size: 14px;
+}
+
+.subcategory a:hover {
+  color: #4A3AFF;
+}
+
+/* ===== MAHSULOTLAR QISMI ===== */
+.products {
+  flex: 1; /* Bo‘sh joyni to‘liq egallaydi */
+}
+
+/* Mahsulotlar grid tartibida */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Har xil ekran o‘lchamiga mos */
+  gap: 20px;
+}
+
+/* Mahsulot kartasi */
+.product-card {
+  background: #fff;
+  border-radius: 14px;
+  text-align: center;
+  padding: 15px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+/* Hoverda mahsulot kartasiga effekt */
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+
+/* Mahsulot rasmi */
+.product-card img {
+  width: 100%;
+  height: 53%;
+  object-fit: cover; /* Rasm o‘lchamiga moslashadi */
+  border-radius: 10px;
+}
+
+/* Narx belgisi */
+.price {
+  color: #4A3AFF;
+  font-weight: 600;
+}
+
+/* Umumiy tugmalar */
+.btn {
+  background: #4A3AFF;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn:hover {
+  background: #372ef3; /* Hoverda rang o‘zgaradi */
+}
+
+
+/* ===== ANIMATSIYA ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+   header {
+    flex-direction: column; /* Header elementlarini ustma-ust joylashtiradi */
+    align-items: flex-start; /* Barcha elementlarni chap tomonga tekislaydi */
+    padding: 15px 20px; /* Ichki bo‘shliqni kichraytiradi */
+    margin: 10px; /* Header atrofi uchun biroz kichik bo‘sh joy */
+  }
+
+  header ul {
+    flex-direction: column; /* Menyu elementlarini ustma-ust joylashtiradi */
+    width: 100%; /* To‘liq kenglikni egallaydi */
+    margin-top: 10px; /* Logotip va menyu orasida bo‘sh joy */
+  }
+
+  header ul li {
+    margin: 8px 0; /* Har bir menyu orasida vertikal masofa */
+  }
+
+  header ul li a {
+    font-size: 16px; /* Telefon ekranida matn biroz kattaroq ko‘rinadi */
+  }
+
+  /* === MAHSULOTLAR BLOKINI TARTIBGA SOLUVCHI KONTEYNER === */
+.product-grid {
+  display: grid; /* Elementlarni grid (katakli) tartibda joylashtiradi */
+  grid-template-columns: repeat(2, 1fr); /* 2 ta ustun yaratadi, har biri teng kenglikda */
+  gap: 70px; /* Kartalar orasidagi masofa */
+  padding: 25px; /* Ichki bo‘sh joy (konteyner ichidagi chet masofasi) */
+  max-width: 1200px; /* Umumiy konteyner kengligi */
+  margin: 0 auto; /* Butun konteynerni markazga joylashtiradi */
+}
+
+/* === HAR BIR MAHSULOT KARTASI (BLOK) UCHUN === */
+.product-card {
+  width: 80%; /* Kartaning to‘liq kengligini egallaydi */
+  background: #fff; /* Orqa fon oq rangda */
+  border-radius: 10px; /* Burchaklarni yumaloqlashtiradi */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Yengil soya berib, kartani ko‘tarib ko‘rsatadi */
+  text-align: center; /* Ichidagi matnni markazda joylashtiradi */
+  padding: 40px ; /* Ichki bo‘shliq — rasm va matn chetga yopishmaydi */
+  transition: transform 0.3s ease; /* Hover holatidagi harakatni yumshatib ko‘rsatadi */
+}
+
+/* === SICHQONCHA USTIGA KELGANDA EFFEKTI === */
+.product-card:hover {
+  transform: translateY(-5px); /* Kartani biroz yuqoriga ko‘taradi */
+}
+
+/* === MAHSULOT RASMI UCHUN === */
+.product-card img {
+  width: 100%; /* Rasm kartaning to‘liq kengligini egallaydi */
+  height: 180px; /* Rasmning balandligini 180px qilib belgilaydi */
+  object-fit: cover; /* Rasm nisbatini buzmasdan to‘ldiradi */
+  border-radius: 8px; /* Rasm burchaklarini yumaloqlashtiradi */
+}
+
+/* === MAHSULOT NOMI (Sarlavhasi) UCHUN === */
+.product-card h3 {
+  margin: 10px 0; /* Yuqoridan va pastdan 10px masofa */
+  font-size: 18px; /* Shrift o‘lchami 18px */
+  color: #333; /* Matn rangi to‘q kulrang */
+}
+
+/* === MAHSULOT TAVSIFI UCHUN === */
+.product-card .desc {
+  color: #666; /* Matn rangi biroz och kulrang */
+  font-size: 14px; /* Tavsif uchun kichikroq shrift */
+}
+
+/* === MAHSULOT NARXI UCHUN === */
+.product-card .price {
+  color: #007bff; /* Narxni ko‘k rangda ko‘rsatadi */
+  font-weight: bold; /* Qalin shrift */
+  margin: 10px 0; /* Yuqori va past masofa 10px */
+}
+
+/* === “SAVATGA QO‘SHISH” TUGMASI UCHUN === */
+.product-card .btn {
+  background: #007bff; /* Tugma foni ko‘k rangda */
+  color: #fff; /* Matn oq rangda */
+  border: none; /* Tugmaga chegara chizig‘i qo‘yilmaydi */
+  padding: 8px 14px; /* Ichki bo‘shliq — matn tugma chetiga tegmaydi */
+  border-radius: 6px; /* Tugma burchaklari yumaloq */
+  cursor: pointer; /* Sichqoncha ustiga kelganda kursorni “qo‘lcha”ga aylantiradi */
+  font-size: 14px; /* Tugmadagi matn o‘lchami 14px */
+}
+
+/* === TUGMA HOVER HOLATIDA === */
+.product-card .btn:hover {
+  background: #0056b3; /* Tugma ustiga bosilganda yoki sichqoncha kelsa, fon quyuqlashadi */
+}
+
+}

@@ -1,0 +1,209 @@
+/* BODY STYLES */
+body {
+  margin: 0; /* Sahifada tashqi bo‘shlik yo‘qotiladi */
+  font-family: Arial, sans-serif; /* Matn shriftini belgilash */
+  background-image: url('https://suret.pics/uploads/posts/2023-09/1695363521_1-1.jpg'); /* Fon rasmi */
+  backdrop-filter: blur(9px); /* Umumiy fonni xira qilish */
+  background-size: 100% 15%; /* Rasming o‘lchamini ekranga moslash */
+  background-repeat: no-repeat; /* Rasm takrorlanmaydi */
+  color: #000000; /* Matn rangi */
+}
+
+body::after {
+  content: ""; /* Qo‘shimcha qatlam yaratish */
+  position: fixed; /* Qatlam ekranga mahkamlanadi */
+  top: 0;
+  left: 0;
+  width: 100%; /* Butun ekran bo‘ylab */
+  height: 100%;
+  background: rgba(0, 0, 0, 0.07); /* Yengil qoraytirish */
+  z-index: -1; /* Asosiy elementlar ustiga chiqmaydi */
+}
+
+/* HEADER SECTION */
+header {
+  background: rgba(255, 255, 255, 0.1); /* Shaffof fon */
+  backdrop-filter: blur(12px); /* Fonga blur effekti */
+  -webkit-backdrop-filter: blur(12px);
+  padding: 15px 40px; /* Ichki bo‘shliq */
+  display: flex; /* Elementlarni yonma-yon qilish */
+  justify-content: space-between; /* O‘rtasidan bo‘lish */
+  align-items: center; /* Vertikal tekislash */
+  border-radius: 16px; /* Burchaklarni yumaloqlash */
+  margin: 15px; /* Tashqi bo‘shliq */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3); /* Soyali effekt */
+}
+
+header ul {
+  list-style: none; /* Belgilarni o‘chirish */
+  display: flex; /* Yonma-yon qilish */
+  margin: 0;
+  padding: 0;
+}
+
+header ul li {
+  margin-left: 20px; /* Menyu orasidagi masofa */
+}
+
+header ul li a {
+  color: #fff; /* Link rangi */
+  text-decoration: none; /* Tagiga chizilmaydi */
+  font-weight: bold; /* Qalin matn */
+  transition: all 0.3s ease; /* Hover animatsiya */
+}
+
+header ul li a:hover {
+  color: #ffb703; /* Hover rangi */
+  text-shadow: 0 0 10px #ffb703; /* Yorqin effekt */
+}
+
+/* BANNER SECTION */
+.banner {
+  text-align: center; /* Matnni o‘rtalash */
+  padding: 70px 20px;
+  background: rgba(255, 255, 255, 0.142);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  margin: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.banner h1 {
+  font-size: 2.5em;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+}
+
+.banner .btn {
+  display: inline-block;
+  padding: 12px 25px;
+  background: rgba(255, 183, 3, 0.8);
+  color: black;
+  text-decoration: none;
+  border-radius: 10px;
+  margin-top: 20px;
+  font-weight: bold;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.banner .btn:hover {
+  transform: scale(1.05);
+  background: rgb(255, 0, 0);
+  color: #fff;
+}
+
+/* PRODUCTS SECTION */
+.products {
+  padding: 40px;
+}
+
+.products .btm {
+  display: inline-block;
+  padding: 12px 25px;
+  background: rgba(8, 0, 255, 0.8);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 10px;
+  margin-top: 20px;
+  font-weight: bold;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.product-grid {
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  flex-wrap: wrap; /* Moslashuvchan joylashuv */
+}
+
+.product-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  width: 220px;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-10px) scale(1.05);
+}
+
+.product-card img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+/* LOGIN FORM */
+.login-container {
+  width: 350px;
+  margin: 100px auto;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  text-align: center;
+  color: #fff;
+}
+
+.login-container h2 {
+  margin-bottom: 20px;
+  color: #ffb703;
+}
+
+.login-container input {
+  width: 90%;
+  padding: 12px;
+  margin: 12px 0;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+}
+
+.login-container input::placeholder {
+  color: rgba(255,255,255,0.7);
+}
+
+.login-container button {
+  width: 100%;
+  padding: 12px;
+  background: rgba(0, 119, 182, 0.9);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-container button:hover {
+  background: rgba(2, 62, 138, 1);
+}
+
+.login-container a {
+  color: #ffb703;
+  text-decoration: none;
+}
+
+/* FOOTER */
+footer {
+  background: rgb(3, 74, 19);
+  backdrop-filter: blur(12px);
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  margin-top: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+.menu-btn {
+  color: #fff;
+  background-color: #2c48a4;
+  border-radius: 5px;
+  padding: 6px 19px;
+  cursor: pointer;
+}
