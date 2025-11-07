@@ -152,12 +152,11 @@ header ul li a:hover {
 
 /* Mahsulot kartasi */
 .product-card {
-  background: #fff;
-  border-radius: 14px;
-  text-align: center;
-  padding: 15px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-  transition: 0.3s;
+  background: #fff; /* Oq fon */
+    border-radius: 14px; /* Yumaloq burchaklar */
+    box-shadow: 0 0px 15px rgba(0,0,0,0.8); /* Soyali effekt */
+    padding: 15px; /* Ichki bo'shliq */
+    text-align: center; /* Matnni markazlash */
 }
 
 /* Hoverda mahsulot kartasiga effekt */
@@ -182,17 +181,20 @@ header ul li a:hover {
 
 /* Umumiy tugmalar */
 .btn {
-  background: #4A3AFF;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 16px;
-  cursor: pointer;
-  margin-top: 10px;
+  width: 100%; /* Tugma kartaga mos kenglikda */
+  padding: 10px; /* Ichki bo‘sh joy */
+  background: #025effda; /* Tugma foni */
+  border: none; /* Chegara yo‘q */
+  color: #fff; /* Matn rangi oq */
+  border-radius: 10px; /* Burchaklar yumaloq */
+  font-size: 14px; /* Tugma matni o‘lchami */
+  cursor: pointer; /* Sichqoncha bosganda pointer paydo bo‘ladi */
+  transition: .2s; /* Animatsiya */
 }
 
 .btn:hover {
-  background: #372ef3; /* Hoverda rang o‘zgaradi */
+  background: #002b99; /* Tugma rangi o‘zgaradi */
+  transform: scale(1.05); /* Tugma kattalashadi */
 }
 
 
