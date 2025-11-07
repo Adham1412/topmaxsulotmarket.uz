@@ -6,19 +6,19 @@ body {
 
 }
 header {
-    background: rgba(255, 255, 255, 0.1); /* Yarim shaffof oq fon */
-    backdrop-filter: blur(12px); /* Orqa fonni xiralashtirish*/
-    -webkit-backdrop-filter: blur(12px); /* Safari uchun */
-    padding: 15px 40px; /* Header ichki bo‘sh joy */
-    position: sticky; /* Yuqoriga yopishadi */
-    top: 0; /* Ekran tepasida joylashadi */
-    z-index: 100; /* Boshqa elementlardan ustun turadi */
-    display: flex; /* Elementlarni yonma-yon joylashtiradi */
-    justify-content: space-between; /* O‘rtada masofa bo‘ladi */
-    align-items: center; /* Elementlarni vertikal markazlaydi */
-    border-radius: 16px; /* Header burchaklarini yumaloqlash */
-    margin: 15px; /* Tashqi bo‘sh joy */
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3); /* Header ostida soyali effekt */
+   background: rgba(255, 255, 255, 0.1); /* Yarim shaffof oq fon */
+  backdrop-filter: blur(12px); /* Orqa fonni xiralashtirish */
+  -webkit-backdrop-filter: blur(12px); /* Safari uchun */
+  padding: 15px 40px; /* Header ichki bo‘sh joy */
+  position: sticky; /* Yuqoriga yopishadi */
+  top: 0; /* Ekran tepasida joylashadi */
+  z-index: 100; /* Boshqa elementlardan ustun turadi */
+  display: flex; /* Elementlarni yonma-yon joylashtiradi */
+  justify-content: space-between; /* O‘rtada masofa bo‘ladi */
+  align-items: center; /* Elementlarni vertikal markazlaydi */
+  border-radius: 16px; /* Header burchaklarini yumaloqlash */
+  margin: 15px; /* Tashqi bo‘sh joy */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3); /* Header ostida soyali effekt */
 }
 header ul {
     list-style: none; /* Ro‘yxat belgisini olib tashlaydi */
@@ -53,6 +53,10 @@ header ul li a:hover {
     padding: 15px; /* Ichki bo'shliq */
     text-align: center; /* Matnni markazlash */
 }
+.planshet:hover {
+    transform: translateY(-5px); /* Biroz yuqoriga ko'tarish */
+    box-shadow: 0 12px 20px rgba(0,0,0,0.3); /* Kuchliroq soyali effekt */
+}
 .planshet img {
     max-width: 100%; /* Rasm kengligini konteynerga moslashtirish */
     border-radius: 8px; /* Rasm burchaklarini yumaloqlash */
@@ -64,7 +68,7 @@ header ul li a:hover {
 }
 .price {
     font-size: 16px; /* Narx shrift o'lchami */
-    color: #4b00ff; /* Yashil rang */
+    color: #4b00ff; /* Ko'k rang */
     margin-bottom: 15px; /* Pastki bo'shliq */
 }
 /* Tugma dizayni */
@@ -79,5 +83,6 @@ button {
     transition: .2s; /* O'tish effekti */
 }
 button:hover {
-    background: #113dad; /* Qizil fon rangi */
+    background: #113dad; /* Tugma rangi o'zgaradi */
+    transform: scale(1.05); /* Tugma kattalashadi */
 }
