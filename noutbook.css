@@ -98,12 +98,11 @@ nav ul li a:hover {
    Teg: <div class="noutbook"> ... </div>
    ============================================================ */
 .noutbook {
-  background: #fffcfc; /* Oq fon */
-  padding: 12px; /* Ichki bo'sh joy */
-  border-radius: 14px; /* Qirralarni yumaloqlash */
-  box-shadow: 0 0 10px rgb(255, 253, 253); /* Soyali effekt */
-  text-align: left; /* Matn chapga tekislanadi */
-  transition: .02s; /* Hover silliqligi */
+  background: #fff; /* Oq fon */
+    border-radius: 14px; /* Yumaloq burchaklar */
+    box-shadow: 0 0px 15px rgba(0,0,0,0.8); /* Soyali effekt */
+    padding: 15px; /* Ichki bo'shliq */
+    text-align: center; /* Matnni markazlash */
 }
 
 .noutbook:hover {
