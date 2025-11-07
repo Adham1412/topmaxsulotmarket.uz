@@ -108,21 +108,23 @@ header ul li a:hover {
 
 /* Savatga qo‘shish tugmasi */
 .products .btm {
-  display: inline-block; /* Tugmani inline elementdan blok shakliga o‘tkazadi (o‘lchamini sozlash uchun) */
-  padding: 12px 25px; /* Tugma ichidagi matnga yuqori-past va chap-o‘ngdan masofa beradi */
-  background: rgba(44, 44, 215, 0.8); /* Tugmaga yarim shaffof ko‘k fon rangi beradi */
-  color: rgb(255, 254, 254); /* Matn rangini oq qilib belgilaydi */
-  text-decoration: none; /* Matn ostidagi chiziqni olib tashlaydi */
-  border-radius: 10px; /* Tugma burchaklarini yumaloqlashtiradi */
-  margin-top: 20px; /* Tugmaning yuqorisidan 20px masofa qoldiradi */
-  font-weight: bold; /* Matnni qalin (bold) qilib chiqaradi */
-  transition: transform 0.3s ease, background 0.3s ease; /* Hover paytida o‘tish (animatsiya) silliq bo‘lishini ta’minlaydi */
+  width: 100%; /* Tugma kartaga mos kenglikda */
+  padding: 10px; /* Ichki bo‘sh joy */
+  background: #025effda; /* Tugma foni */
+  border: none; /* Chegara yo‘q */
+  color: #fff; /* Matn rangi oq */
+  border-radius: 10px; /* Burchaklar yumaloq */
+  font-size: 14px; /* Tugma matni o‘lchami */
+  cursor: pointer; /* Sichqoncha bosganda pointer paydo bo‘ladi */
+  transition: .2s; /* Animatsiya */
+  text-decoration: none; /* Tag chizig‘ini olib tashlash */
+}
   
 
-}
+
 .products .btm:hover {
   transform: scale(1.05); /* Tugmani biroz kattalashtiradi */
-  background: rgb(0, 33, 75); /* Tugma fonini to‘q ko‘k rangga o‘zgartiradi */
+  background: rgb(0, 72, 167); /* Tugma fonini to‘q ko‘k rangga o‘zgartiradi */
 }
 /* Mahsulotlar panjarasi */
 .product-grid {
