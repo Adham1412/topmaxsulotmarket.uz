@@ -1,39 +1,38 @@
 /* Body styling */
 body {
-  font-family: Arial, sans-serif; /* Sayt shriftini belgilaydi */
-  background: #f7f7fb; /* Orqa fon rangi */
-  margin: 0; /* Standart bo'sh joyni olib tashlaydi */
-  padding: 20px; /* Sahifa chetiga ichki bo'sh joy beradi */
+  padding: 20px; /* telefonlar uchun bo'sh joyni optimallashtiradi */
+    font-family: Arial, Helvetica, sans-serif; /* Umumiy shrift oilasi */
+    margin: 0; /* Tana uchun default margin olib tashlanadi */
+    background: #f4f4f4; /* Orqa fon rangi */
 }
 
 /* Mahsulotlar grid joylashuvi */
 .telefon-wrapper {
   display: grid; /* Kartalarni grid shaklida joylashtiradi */
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /* Har bir karta minimal 240px bo‘ladi va joyga qarab avtomatik joylashadi */
+  grid-template-columns: repeat(4, 1fr); /* Har bir karta minimal 300px bo‘ladi va joyga qarab avtomatik joylashadi */
   gap: 20px; /* Kartalar orasidagi masofa */
 }
 
 /* Har bir mahsulot kartasi */
 .telefon {
-  background: #fff; /* Karta foni oq rang */
-  padding: 12px; /* Ichki bo‘sh joy */
-  border-radius: 14px; /* Qirralarni yumaloqlash */
-  box-shadow: 0 0 10px rgba(0,0,0,0.08); /* Yengil soyali effekt */
-  text-align: left; /* Matnni chapga tekislash */
-  transition: .2s; /* Hoverdagi animatsiya silliqligi */
+    background: #fff; /* Oq fon */
+    border-radius: 14px; /* Yumaloq burchaklar */
+    box-shadow: 0 0px 15px rgba(0,0,0,0.8); /* Soyali effekt */
+    padding: 15px; /* Ichki bo'shliq */
+    text-align: center; /* Matnni markazlash */
 }
 
 /* Hover effekti */
 .telefon:hover {
-  transform: scale(1.02); /* Karta kattalashadi */
+  transform: scale(1.05); /* Karta kattalashadi */
+  box-shadow: 0 12px 20px rgba(0,0,0,0.3); /* Kuchliroq soyali effekt */
+
 }
 
 /* Rasm uslubi */
 .telefon img {
-  width: 100%; /* Rasm kengligi kartaga moslashadi */
-  height: 250px; /* Rasm balandligi */
-  object-fit: cover; /* Rasm proporsiyasini buzmasdan joylashtiradi */
-  border-radius: 12px; /* Rasm burchaklarini yumaloqlash */
+  max-width: 100%; /* Rasm kengligini konteynerga moslashtirish */
+  border-radius: 8px; /* Rasm burchaklarini yumaloqlash */
 }
 
 /* Mahsulot nomi */
@@ -44,22 +43,21 @@ h4 {
 
 /* Narx dizayni */
 .price {
-  font-size: 17px; /* Matn o‘lchami */
-  font-weight: bold; /* Qalin matn */
-  color: #4b00ff; /* Narx rangi */
+  font-size: 16px; /* Narx shrift o'lchami */
+  color: #4b00ff; /* Binafsha rang */
+  margin-bottom: 15px; /* Pastki bo'shliq */
 }
 
 /* Tugma dizayni */
 button {
-  width: 100%; /* Tugma kartaga mos kenglikda */
-  padding: 10px; /* Ichki bo‘sh joy */
-  background: #025effda; /* Tugma foni */
-  border: none; /* Chegara yo‘q */
-  color: #fff; /* Matn rangi oq */
-  border-radius: 10px; /* Burchaklar yumaloq */
-  font-size: 14px; /* Tugma matni o‘lchami */
-  cursor: pointer; /* Sichqoncha bosganda pointer paydo bo‘ladi */
-  transition: .2s; /* Animatsiya */
+    width: 100%; /* Tugma kengligi to'liq */
+    padding: 10px; /* Ichki bo'shliq */
+    background: #025effda; /* Ko'k fon rangi */
+    color: #fff; /* Oq matn rangi */
+    border-radius: 10px; /* Yumaloq burchaklar */
+    font-size: 14px; /* Shrfit o'lchami */
+    cursor: pointer; /* Kursor ko'rsatkich */
+    transition: .2s; /* O'tish effekti */
 }
 
 /* Tugma hover effekti */
