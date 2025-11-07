@@ -1,0 +1,89 @@
+body {
+    padding: 20px; /* Planshetlar uchun bo'sh joyni optimallashtiradi */
+    font-family: Arial, Helvetica, sans-serif; /* Umumiy shrift oilasi */
+    margin: 0; /* Tana uchun default margin olib tashlanadi */
+    background: #f4f4f4; /* Orqa fon rangi */
+
+}
+header {
+   background: rgba(255, 255, 255, 0.1); /* Yarim shaffof oq fon */
+  backdrop-filter: blur(12px); /* Orqa fonni xiralashtirish */
+  -webkit-backdrop-filter: blur(12px); /* Safari uchun */
+  padding: 15px 40px; /* Header ichki bo‘sh joy */
+  position: sticky; /* Yuqoriga yopishadi */
+  top: 0; /* Ekran tepasida joylashadi */
+  z-index: 100; /* Boshqa elementlardan ustun turadi */
+  display: flex; /* Elementlarni yonma-yon joylashtiradi */
+  justify-content: space-between; /* O‘rtada masofa bo‘ladi */
+  align-items: center; /* Elementlarni vertikal markazlaydi */
+  border-radius: 16px; /* Header burchaklarini yumaloqlash */
+  margin: 15px; /* Tashqi bo‘sh joy */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3); /* Header ostida soyali effekt */
+}
+header ul {
+    list-style: none; /* Ro‘yxat belgisini olib tashlaydi */
+    display: flex; /* Yonma-yon joylashadi */
+    margin: 5px; 
+    padding: 5px;     
+}
+header ul li{
+    margin-left: 20px; /* Menular orasida bo‘sh joy */
+}
+header ul li a {
+    color: #000000; /* Matn rangi qora */
+    text-decoration: none; /* Tagini chizmaydi */
+    font-weight: bold; /* Qalin matn */
+    transition: all 0.3s ease; /* Hover animatsiyasi */
+}
+header ul li a:hover {
+    color: #ffb703; /* Sariq rangga o‘zgaradi */
+    text-shadow: 0 0 10px #ffb703; /* Yorqin effekt beradi */
+}
+/* ===Maxsulotlar grid joylashtirish=== */
+.smartwatch-wrapper {
+    display: grid; /* Grid tizimida joylashtirish */
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /* Moslashuvchan ustunlar */
+    gap: 20px; /* Elementlar orasidagi bo'shliq */
+    
+}
+.smartwatch {
+    background: #fff; /* Oq fon */
+    border-radius: 14px; /* Yumaloq burchaklar */
+    box-shadow: 0 0px 15px rgba(0,0,0,0.8); /* Soyali effekt */
+    padding: 15px; /* Ichki bo'shliq */
+    text-align: center; /* Matnni markazlash */
+}
+.smartwatch:hover {
+    transform: translateY(-5px); /* Biroz yuqoriga ko'tarish */
+    box-shadow: 0 12px 20px rgba(0,0,0,0.3); /* Kuchliroq soyali effekt */
+}
+.smartwatch img {
+    max-width: 100%; /* Rasm kengligi konteynerga moslashadi */
+    border-radius: 10px; /* Rasm burchaklarini yumaloqlash */
+}
+.smartwatch h4 {
+    margin: 10px 0; /* Sarlavha atrofida bo'sh joy */
+    font-size: 18px; /* Sarlavha shrift o'lchami */
+    color: #333; /* Sarlavha rangi */
+}
+.price {
+    font-size: 16px; /* Narx shrift o'lchami */
+    color: #4b00ff; /* Ko'k rang */
+    margin: 10px 0; /* Narx atrofida bo'sh joy */
+}
+/* Tugma dizayni */
+button {
+    width: 100%; /* Tugma kengligi to'liq */
+    padding: 10px; /* Ichki bo'shliq */
+    background: #025effda; /* Ko'k fon rangi */
+    color: #fff; /* Oq matn rangi */
+    border-radius: 10px; /* Yumaloq burchaklar */
+    font-size: 14px; /* Shrfit o'lchami */
+    cursor: pointer; /* Kursor ko'rsatkich */
+    transition: .2s; /* O'tish effekti */
+}
+button:hover {
+    background: #002b99; /* Tugma rangi o‘zgaradi */
+    transform: scale(1.05); /* Tugma kattalashadi */
+
+}
