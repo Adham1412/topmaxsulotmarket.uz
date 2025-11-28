@@ -12,7 +12,7 @@ body:after {
 
 /* ====== Header (Sahifa yuqori menyusi) ====== */
 header {
-  background: rgba(255, 255, 255, 0.1); /* Shaffof oq fon */
+  background: rgba(255, 255, 255, 0.184); /* Shaffof oq fon */
   backdrop-filter: blur(12px); /* Xiralik effekti */
   -webkit-backdrop-filter: blur(12px); /* Safari uchun mos */
   padding: 15px 40px; /* Ichki bo‘sh joy */
@@ -203,20 +203,34 @@ header ul li a:hover {
   from { opacity: 0; transform: translateY(-5px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
+.mobile-bottom-nav {
+    display: none; /* Dastlab yashirilgan */
+}
 @media (max-width: 768px) {
-   header {
-    flex-direction: column; /* Header elementlarini ustma-ust joylashtiradi */
-    align-items: flex-start; /* Barcha elementlarni chap tomonga tekislaydi */
-    padding: 15px 20px; /* Ichki bo‘shliqni kichraytiradi */
-    margin: 10px; /* Header atrofi uchun biroz kichik bo‘sh joy */
-  }
 
-  header ul {
-    flex-direction: column; /* Menyu elementlarini ustma-ust joylashtiradi */
-    width: 100%; /* To‘liq kenglikni egallaydi */
-    margin-top: 10px; /* Logotip va menyu orasida bo‘sh joy */
-  }
+  header {
+  width: calc(100% + 340px); /* 60px ga kengayadi */
+  margin-right: -60px; /* Ortiqcha kengayishni tashqariga chiqaradi */
+  position: sticky;
+  top: 0;
+  background: white;
+  border-bottom: 1px solid #ddd; /* Pastda chiziq */
+  padding: 0;
+}
+nav{
+  display: none;
+}
+header ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* Pastga joylashtiradi */
+  gap: 30px;
+  height: 60px; /* Menyu balandligi */
+  margin: 0;
+  padding: 0;
+}
+
 
   header ul li {
     margin: 8px 0; /* Har bir menyu orasida vertikal masofa */
@@ -296,4 +310,144 @@ header ul li a:hover {
   background: #0056b3; /* Tugma ustiga bosilganda yoki sichqoncha kelsa, fon quyuqlashadi */
 }
 
+/* --- MOBIL MENYU (YOPISHIB TURADI) --- */
+    .mobile-bottom-nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        
+        /* ENG MUHIM QISM: QOTIRISH */
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 65px;
+        
+        /* iPhone X va yangilar uchun pastdan joy */
+        padding-bottom: env(safe-area-inset-bottom);
+        box-sizing: content-box;
+
+        /* Dizayn  */
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 -4px 15px rgba(154, 12, 12, 0.5);
+        
+        z-index: 999999; /* Hamma narsani ustida */
+    }
+
+    .mobile-bottom-nav .nav-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex-grow: 1;
+        text-decoration: none;
+        color: #777;
+        font-size: 11px;
+        font-weight: 500;
+    }
+
+    .mobile-bottom-nav .nav-link .nav-icon {
+        font-size: 24px;
+        margin-bottom: 3px;
+        line-height: 1;
+    }
+
+    .mobile-bottom-nav .nav-link.active {
+        color: #000000;
+    }
+
+    /* --- ELEMENTLARNI MOSLASHTIRISH --- */
+    .banner {
+        margin: 15px;
+        padding: 50px 15px;
+    }
+
+    .banner h1 {
+        font-size: 2.0em;
+    }
+
+    .product-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-card {
+        width: 90%;
+        max-width: 350px;
+        /* Mobilda hover effekti xalaqit bermasligi uchun o'chiramiz yoki kamaytiramiz */
+        transform: none !important; 
+    }
+    login-header{
+        display: none;
+    }
+}
+
+/* Kichik telefonlar uchun */
+@media (max-width: 480px) {
+    .banner h1 {
+        font-size: 1.6em;
+    }
+}
+/* === TELEGRAM TUGMASI DIZAYNI === */
+.telegram-float {
+    position: fixed;
+    bottom: 30px; /* Kompyuterda pastdan masofa */
+    right: 30px;  /* O'ngdan masofa */
+    width: 100px;
+    height: 100px;
+    background-color: #0088cc; /* Telegram rangi */
+    color: white;
+    border-radius: 50%; /* Dumaloq qilish */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 136, 204, 0.5);
+    z-index: 1000; /* Hamma narsani ustida turishi uchun */
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+/* Sichqoncha borganda kattalashish effekti */
+.telegram-float:hover {
+    transform: scale(1.1);
+    background-color: #0077b5;
+}
+
+/* Pulsatsiyalanuvchi (tirikdek) effekt */
+.telegram-float::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #0088cc;
+    opacity: 0.5;
+    z-index: -1;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* === TELEFONDA JOYLASHUVNI TO'G'IRLASH === */
+@media (max-width: 768px) {
+    .telegram-float {
+        width: 50px;  /* Telefonda biroz kichikroq */
+        height: 50px;
+        right: 20px;
+        
+        /* MUHIM JOYi: Pastki menyu balandligi (65px) + 20px joy tashlaymiz */
+        bottom: 90px; 
+    }
+    
+    /* Ikonka o'lchamini moslash */
+    .telegram-float svg {
+        width: 24px;
+        height: 24px;
+    }
 }
