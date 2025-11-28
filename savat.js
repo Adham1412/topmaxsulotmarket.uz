@@ -127,6 +127,15 @@ async function sendTelegram() {
     const name = document.getElementById('client-name').value;
     const phone = document.getElementById('client-phone').value;
 
+    // === TELEFON TEKSHIRUV ===
+let cleanedPhone = phone.replace(/\s/g, ""); // bo'shliqlarni olib tashlash
+
+if (!cleanedPhone.match(/^\+998\d{9}$/)) {
+    alert("Telefon raqam noto'g'ri! Masalan: +998901234567");
+    return;
+}
+    // Lokatsiya tekshiruvi
+
     if (!userLocation) {
         alert("Iltimos, yetkazib berish manzilini belgilash uchun 'Joylashuvni belgilash' tugmasini bosing!");
         return;
@@ -135,7 +144,7 @@ async function sendTelegram() {
     // 1. Mahsulotlar ro'yxatini matn qilish
     let message = `<b>📦 YANGI BUYURTMA!</b>\n\n`;
     message += `👤 <b>Mijoz:</b> ${name}\n`;
-    message += `📞 <b>Telefon:</b> ${phone}\n\n`;
+    message += `📞 <b>Telefon:</b> ${cleanedPhone}\n\n`;
     message += `🛒 <b>Mahsulotlar:</b>\n`;
 
     cart.forEach((item, index) => {
@@ -170,7 +179,7 @@ async function sendTelegram() {
             })
         });
 
-        alert("✅ Buyurtmangiz qabul qilindi! Tez orada aloqaga chiqamiz.");
+        alert("✅ Buyurtmangiz qabul qilindi! Qayta urinmang Tez orada aloqaga chiqamiz.");
         
         // Savatni tozalash va modalni yopish
         localStorage.removeItem('cart_v1');
@@ -183,7 +192,8 @@ async function sendTelegram() {
         locationBtn.innerText = "📍 Joylashuvni belgilash";
         userLocation = null;
 
-    } catch (error) {
+        } 
+    catch (error) {
         alert("❌ Xatolik yuz berdi. Internetni tekshiring.");
         console.error(error);
     }
@@ -191,3 +201,28 @@ async function sendTelegram() {
 
 // Dastlabki ishga tushirish
 renderCart();
+
+// === TELEFON MASKASI ===
+const phoneInput = document.getElementById("client-phone");
+
+// +998 bilan boshlash
+phoneInput.addEventListener("focus", () => {
+    if (phoneInput.value === "") {
+        phoneInput.value = "+998 ";
+    }
+});
+
+// Har yozilgan belgini formatlash
+phoneInput.addEventListener("input", () => {
+    let v = phoneInput.value.replace(/\D/g, ""); // Faqat raqamlar
+    if (!v.startsWith("998")) v = "998" + v;     // +998 majburiy
+
+    let formatted = "+998 ";
+
+    if (v.length > 3) formatted += v.substring(3, 5);
+    if (v.length > 5) formatted += " " + v.substring(5, 8);
+    if (v.length > 8) formatted += " " + v.substring(8, 10);
+    if (v.length > 10) formatted += " " + v.substring(10, 12);
+
+    phoneInput.value = formatted.trim();
+});
