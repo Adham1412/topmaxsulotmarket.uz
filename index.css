@@ -1,439 +1,465 @@
-/* ====== Umumiy sahifa sozlamalari ====== */
+/* =========================================
+   1. UMUMIY SAHIFA SOZLAMALARI
+   ========================================= */
 body {
-  margin: 0; /* Sahifaning tashqi bo‘sh joylarini olib tashlaydi */
-  font-family: Arial, sans-serif; /* Matn uchun shriftni belgilaydi */
-  background-image: url('https://suret.pics/uploads/posts/2023-09/1695363521_1-1.jpg'); /* Orqa fon rasmi */
-  backdrop-filter: blur(9px); /* Fonni biroz xiralashtiradi */
-  background-size:  100% 100%; /* Rasmni ekran o‘lchamiga to‘liq moslashtiradi */
-  background-repeat: no-repeat; /* Rasm takrorlanmasligi uchun */
-  background-position: center; /* Rasm markazda joylashadi */
-  color: #fff; /* Matn rangi oq */
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    
+    /* Orqa fon rasmi */
+    background-image: url('https://suret.pics/uploads/posts/2023-09/1695363521_1-1.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed; /* Rasm qimirlamasligi uchun */
+    
+    color: #fff;
+    min-height: 100vh;
 }
 
-/* Orqa fon ustiga biroz qora shaffof qatlam qo‘yiladi */
+/* Orqa fon xiralashtirish (Blur) va qoraytirish qatlami */
 body::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.07); /* Yengil qoramtir qatlam */
-  z-index: -1; /* Boshqa elementlar orqasida joylashadi */
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Dizayn o'zgarmasligi uchun : */
+    background: rgba(0, 0, 0, 0.07); 
+    backdrop-filter: blur(9px); /* Blur shu yerga o'tdi */
+    -webkit-backdrop-filter: blur(9px);
+    z-index: -1;
 }
 
-/* ====== Header (Sahifa yuqori menyusi) ====== */
+/* Linklar */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* =========================================
+   2. HEADER (Yuqori Menyu - Kompyuter uchun)
+   ========================================= */
 header {
-  background: rgba(255, 255, 255, 0.1); /* Shaffof oq fon */
-  backdrop-filter: blur(12px); /* Xiralik effekti */
-  -webkit-backdrop-filter: blur(12px); /* Safari uchun mos */
-  padding: 15px 40px; /* Ichki bo‘sh joy */
-  display: flex; /* Flex tartibda joylashadi */
-  justify-content: space-between; /* Logotip va menyu orasini teng ajratadi */
-  align-items: center; /* Vertikal markazlashtiradi */
-  border-radius: 16px; /* Yumaloq burchaklar */
-  margin: 15px; /* Tashqi bo‘sh joy */
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3); /* Soya effekti */
-}
-
-/* Navigatsiya ro‘yxati */
-header ul {
-  list-style: none; /* Belgilarni olib tashlaydi */
-  display: flex; /* Elementlarni yonma-yon joylashtiradi */
-  margin: 0;
-  padding: 0;
-}
-
-/* Menyu elementlarining orasi */
-header ul li {
-  margin-left: 20px;
-}
-
-/* Havolalarning dizayni */
-header ul li a {
-  color: #fff; /* Oq rang */
-  text-decoration: none; /* Tag chizig‘ini olib tashlash */
-  font-weight: bold; /* Qalin matn */
-  transition: all 0.3s ease; /* Yumshoq o‘tish effekti */
-}
-
-/* Hover effekti (sichqoncha olib borilganda) */
-header ul li a:hover {
-  color: #ffb703; /* Sariq rang */
-  text-shadow: 0 0 10px #ffb703; /* Yorqin effekt */
-}
-
-/* ====== Banner (Reklama qismi) ====== */
-.banner {
-  text-align: center; /* Matnni markazga joylashtiradi */
-  padding: 70px 20px; /* Ichki bo‘sh joylar */
-  background: rgba(255, 255, 255, 0.142); /* Shaffof fon */
-  backdrop-filter: blur(15px); /* Xiralashtirish */
-  -webkit-backdrop-filter: blur(15px);
-  border-radius: 20px;
-  margin: 30px; /* Tashqi bo‘sh joy */
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4); /* Soya */
-}
-
-/* Banner sarlavhasi */
-.banner h1 {
-  font-size: 2.5em; /* Katta shrift */
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6); /* Soya */
-}
-
-/* Banner tugmasi */
-.banner .btn {
-  display: inline-block;
-  padding: 12px 25px;
-  background: rgba(255, 183, 3, 0.8); /* Sariq fon */
-  color: rgb(0, 0, 0);
-  text-decoration: none;
-  border-radius: 10px;
-  margin-top: 20px;
-  font-weight: bold;
-  transition: transform 0.3s ease, background 0.3s ease; /* Tugma bosilganda harakat effekti */
-}
-
-/* Tugmaga hover effekti */
-.banner .btn:hover {
-  transform: scale(1.05); /* Kattalashadi */
-  background: rgb(255, 0, 0); /* Qizilga o‘zgaradi */
-  color:#fff; /* Matn oq bo‘ladi */
-}
-
-/* ====== Mahsulotlar bo‘limi ====== */
-.products {
-  padding: 40px;
-}
-
-/* Savatga qo‘shish tugmasi */
-.products .btm {
-  width: 100%; /* Tugma kartaga mos kenglikda */
-  padding: 10px; /* Ichki bo‘sh joy */
-  background: #025effda; /* Tugma foni */
-  border: none; /* Chegara yo‘q */
-  color: #fff; /* Matn rangi oq */
-  border-radius: 10px; /* Burchaklar yumaloq */
-  font-size: 14px; /* Tugma matni o‘lchami */
-  cursor: pointer; /* Sichqoncha bosganda pointer paydo bo‘ladi */
-  transition: .2s; /* Animatsiya */
-  text-decoration: none; /* Tag chizig‘ini olib tashlash */
-}
-  
-
-
-.products .btm:hover {
-  transform: scale(1.05); /* Tugmani biroz kattalashtiradi */
-  background: rgb(0, 72, 167); /* Tugma fonini to‘q ko‘k rangga o‘zgartiradi */
-}
-/* Mahsulotlar panjarasi */
-.product-grid {
-  display: flex; /* Yonma-yon joylashadi */
-  gap: 25px; /* Oralig‘i */
-  justify-content: center; /* Markazda joylashadi */
-  flex-wrap: wrap; /* Kichik ekranlarda pastga tushadi */
-}
-
-/* === HAR BIR MAHSULOT KARTASI UCHUN ASOSIY USTUN SOZLAMALAR === */
-.product-card { 
-  background: rgba(255, 255, 255, 0.1); /* Kartaning orqa fonini yarim shaffof oq rangda beradi */
-  backdrop-filter: blur(10px); /* Orqa fonni biroz xiralashtiradi (blur effekti) */
-  -webkit-backdrop-filter: blur(10px); /* Safari brauzeri uchun xiralashtirish qo‘llab-quvvatlovi */
-  padding: 20px; /* Kartaning ichki bo‘shligini (ichki masofani) belgilaydi */
-  border-radius: 16px; /* Kartaning burchaklarini yumaloqlashtiradi */
-  text-align: center; /* Kartadagi matn va elementlarni o‘rtaga joylashtiradi */
-  box-shadow: 0 8px 25px rgba(0,0,0,0.4); /* Kartaning atrofiga soya beradi (chuqurlik effekti yaratadi) */
-  width: 220px; /* Har bir karta kengligini belgilaydi */
-  transition: transform 0.3s ease; /* Hover effekti paytida o‘tish (animatsiya) silliq bo‘lishini ta’minlaydi */
-}
-
-/* === HOVER HOLATIDA (SICHQONCHA USTIGA KELGANDA) EFFEKTLAR === */
-.product-card:hover {
-  transform: translateY(-10px) scale(1.05); /* Kartani biroz yuqoriga ko‘taradi va kattalashtiradi */
-}
-
-/* === MAHSULOT RASMI UCHUN SOZLAMALAR === */
-.product-card img {
-  width: 100%; /* Rasm kengligini kartaning 100% qismi bo‘yicha moslashtiradi */
-  border-radius: 12px; /* Rasm burchaklarini yumaloqlashtiradi */
-}
-
-
-/* ====== Login sahifasi dizayni ====== */
-.login-container {
-  width: 350px;
-  margin: 100px auto;
-  padding: 30px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 20px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
-  text-align: center;
-  color: #fff;
-}
-
-/* Login sarlavhasi */
-.login-container h2 {
-  margin-bottom: 20px;
-  color: #ffb703;
-}
-
-/* Kiritish maydonlari */
-.login-container input {
-  width: 90%;
-  padding: 12px;
-  margin: 12px 0;
-  border: none;
-  border-radius: 8px;
-  outline: none;
-  background: rgba(255,255,255,0.2);
-  color: #fff;
-}
-
-/* Placeholder rangi */
-.login-container input::placeholder {
-  color: rgba(255,255,255,0.7);
-}
-
-/* Login tugmasi */
-.login-container button {
-  width: 100%;
-  padding: 12px;
-  background: rgba(0, 119, 182, 0.9);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-/* Hover effekti */
-.login-container button:hover {
-  background: rgba(2, 62, 138, 1);
-}
-
-/* Ro‘yxatdan o‘tish havolasi */
-.login-container a {
-  color: #ffb703;
-  text-decoration: none;
-}
-
-/* ====== Footer ====== */
-footer {
-  background: rgb(3, 74, 19); /* Yashil fon */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: #fff;
-  text-align: center;
-  padding: 20px;
-  margin-top: 30px;
-  border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-}
-
-/* Menyu tugmasi (mobil versiyada ko‘rinadi) */
-.menu-btn {
-  color:#ffffff;
-  background-color: #2c48a4;
-  border-radius: 5px;
-  padding: 6px 19px;
-  cursor: pointer;
-}
-
-/* ====== RESPONSIVE STYLE — Mobil qurilmalar uchun ====== */
-
-/* Planshet (768px gacha) */
-@media (max-width: 768px) {
-  header {
-    flex-direction: column; /* Elementlar ustma-ust joylashadi */
-    padding: 10px 20px;
-    text-align: center;
-  }
-
-  header ul {
-    flex-direction: column;
-    margin-top: 10px;
-  }
-
-  header ul li {
-    margin: 8px 0;
-  }
-
-  .banner {
-    padding: 40px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 16px;
     margin: 15px;
-  }
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
 
+header .logo img {
+    max-width: 200px; /* Logotip juda katta bo'lib ketmasligi uchun */
+    height: auto;
+}
+
+header ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+header ul li {
+    margin-left: 20px;
+}
+
+header ul li a {
+    color: #fff;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+header ul li a:hover {
+    color: #ffb703;
+    text-shadow: 0 0 10px #ffb703;
+}
+
+/* =========================================
+   3. BANNER
+   ========================================= */
+.banner {
+    text-align: center;
+    padding: 70px 20px;
+    background: rgba(255, 255, 255, 0.162);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 20px;
+    margin: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.banner h1 {
+    font-size: 2.5em;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.banner .btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background: rgb(255, 196, 48);
+    color: rgb(0, 0, 0);
+    border-radius: 10px;
+    margin-top: 20px;
+    font-weight: bold;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.banner .btn:hover {
+    transform: scale(1.05);
+    background: rgb(255, 0, 0);
+    color: #fff;
+}
+
+/* =========MAHSULOTLAR================ */
+.products {
+    padding: 40px;
+    /* Katta ekranda pastga joy tashlash shart emas, faqat mobilda kerak */
+}
+
+.product-grid {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.product-card {
+    background: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    width: 220px;
+    transition: transform 0.3s ease;
+    
+    /* Elementlar chiroyli turishi uchun */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card:hover {
+    transform: translateY(-10px) scale(1.05);
+}
+
+.product-card img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.product-card h3 {
+    margin-bottom: 10px;
+}
+
+/* Tugma */
+.btm {
+    width: 100%;
+    padding: 10px;
+    background: #025effda;
+    border: none;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: .2s;
+    display: block; /* a tegi bo'lgani uchun */
+    box-sizing: border-box;
+}
+
+.btm:hover {
+    transform: scale(1.05);
+    background: rgb(0, 72, 167);
+}
+
+/* =========================================
+    LOGIN KONTENERI
+   ========================================= */
+.login-container {                         
+    width: 500px;                       /* Blok kengligi */
+    height: 500px;                      /* Blok balandligi  */
+    margin: 100px auto;                 /* Tepadan 100px, o'rtada auto: markazga qo'yadi */
+    padding: 30px;                      /* Ichki bo'shliq */
+    background: rgba(255, 255, 255, 0.129);  /* Yarim shaffof oq fon */
+    backdrop-filter: blur(20px);        /* Orqa fonni xiralashtirish (glassmorph effekt) */
+    -webkit-backdrop-filter: blur(20px);/* Safari uchun xuddi shu effekt */
+    border-radius: 20px;                /* Burchaklarni yumaloqlash */
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5); /* Qora soyani pastga tashlaydi */
+    text-align: center;                 /* Matnlarni markazga joylash */
+    color: #fff;                        /* Matn rangini oq qilish */
+}
+
+.login-container h2 {
+    margin-bottom: 20px;                /* Pastidan bo'shliq */
+    color: #000000;                     /* Sarlavha rangini qora qilish */
+}
+
+.login-container input {
+    width: 90%;                         /* Input kengligi konteynerning 90% */
+    padding: 12px;                      /* Input ichki bo'shligi */
+    margin: 20px 0;                     /* Yuqori va past bo'shliqlar */
+    border: none;                       /* Chegarani olib tashlash */
+    border-radius: 8px;                 /* Input burchaklarini yumaloqlash */
+    outline: none;                      /* Fokus bo'lganda chiziq chiqmasin */
+    background: rgba(255,255,255,0.2);  /* Shaffof oq fon */
+    color: #fff;                        /* Input ichidagi matn oq rangda */
+}
+
+.login-container input::placeholder {
+    color: rgba(255,255,255,0.7);       /* Placeholder matnini xira oq rangda qilish */
+}
+
+.login-container button {
+    width: 95%;                        /* Tugma to'liq kenglikda */
+    padding: 12px;                      /* Tugma ichki bo'shligi */
+    background: rgba(0, 119, 182, 0.9); /* Moviy fon (yorqin) */
+    color: white;                       /* Yarim oq rangdagi matn */
+    border: none;                       /* Chegarasiz tugma */
+    border-radius: 8px;                 /* Yumaloq burchaklar */
+    font-weight: bold;                  /* Qalin matn */
+    cursor: pointer;                    /* Sichqoncha ustiga borganda qo'l belgisi */
+    transition: 0.3s;                   /* Yumshoq animatsiya */
+}
+
+.login-container button:hover {
+    background: rgba(2, 62, 138, 1);    /* Hoverda quyuqroq moviyga o'tadi */
+}
+
+.login-container a {
+    color: #00000096;                   /* Link rangi */
+}
+
+/* ===== PASTKI MOBIL MENYU (Desktopda yashirin)=========== */
+.mobile-bottom-nav {
+    display: none;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background: rgb(4, 85, 8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    margin: 30px 15px 15px 15px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    color: #fff;
+}
+
+
+/* =========================================
+   7. RESPONSIVE STYLE (Mobil qurilmalar)
+   ========================================= */
+@media (max-width: 768px) {
+
+    /* --- BODY SOZLAMASI --- */
+    body {
+        /* Menyu tagiga kirib qolmasligi uchun joy */
+        padding-bottom: 80px !important;
+        background-size: cover; /* Mobilda rasm chiroyli ko'rinishi uchun */
+        background-attachment: fixed;
+    }
+
+    /* --- KOMPYUTER ELEMENTLARINI YASHIRISH --- */
+    /* Kompyuter menyusini yashiramiz */
+  header nav {
+    display: none; 
+  }
+  header {
+    position: fixed;
+    z-index: 9999;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 3px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 16px;
+    margin: 0% 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  
+  }
+  /* --- 3. BANNER VA MAHSULOTLAR --- */
+  .banner {
+    text-align: center;
+    padding: 70px 20px;
+    background: rgba(255, 255, 255, 0.142);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 20px;
+    margin: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+
+
+    
+  }
+  
   .banner h1 {
     font-size: 1.8em;
   }
 
   .product-grid {
-    flex-direction: column;
-    align-items: center;
+    gap: 15px;
   }
-
+  
   .product-card {
-    width: 90%;
-    max-width: 300px;
+    width: 100%; /* Telefonda to'liq kenglik */
+    max-width: 350px;
   }
 
-  .login-container {
-    width: 90%;
-    margin: 50px auto;
-    padding: 25px;
-  }
+    /* --- MOBIL MENYU (YOPISHIB TURADI) --- */
+    .mobile-bottom-nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        
+        /* ENG MUHIM QISM: QOTIRISH */
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 65px;
+        
+        /* iPhone X va yangilar uchun pastdan joy */
+        padding-bottom: env(safe-area-inset-bottom);
+        box-sizing: content-box;
 
-  body {
-    background-size: cover;
-  }
+        /* Dizayn  */
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 -4px 15px rgba(154, 12, 12, 0.5);
+        
+        z-index: 999999; /* Hamma narsani ustida */
+    }
+
+    .mobile-bottom-nav .nav-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex-grow: 1;
+        text-decoration: none;
+        color: #777;
+        font-size: 11px;
+        font-weight: 500;
+    }
+
+    .mobile-bottom-nav .nav-link .nav-icon {
+        font-size: 24px;
+        margin-bottom: 3px;
+        line-height: 1;
+    }
+
+    .mobile-bottom-nav .nav-link.active {
+        color: #000000;
+    }
+
+    /* --- ELEMENTLARNI MOSLASHTIRISH --- */
+    .banner {
+        margin: 15px;
+        padding: 50px 15px;
+    }
+
+    .banner h1 {
+        font-size: 2.0em;
+    }
+
+    .product-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-card {
+        width: 90%;
+        max-width: 350px;
+        /* Mobilda hover effekti xalaqit bermasligi uchun o'chiramiz yoki kamaytiramiz */
+        transform: none !important; 
+    }
+    login-header{
+        display: none;
+    }
 }
 
-/* Kichik telefonlar (480px gacha) */
+/* Kichik telefonlar uchun */
 @media (max-width: 480px) {
-  .banner h1 {
-    font-size: 1.5em;
-  }
-
-  .banner .btn, .products .btm {
-    padding: 10px 18px;
-    font-size: 14px;
-  }
-
-  .product-card img {
-    height: 180px;
-    object-fit: cover;
-  }
-
-  .login-container input {
-    width: 95%;
-  }
-
-  .menu-btn {
-    padding: 8px 16px;
-  }
+    .banner h1 {
+        font-size: 1.6em;
+    }
 }
 
+/* === TELEGRAM TUGMASI DIZAYNI === */
+.telegram-float {
+    position: fixed;
+    bottom: 30px; /* Kompyuterda pastdan masofa */
+    right: 30px;  /* O'ngdan masofa */
+    width: 100px;
+    height: 100px;
+    background-color: #0088cc; /* Telegram rangi */
+    color: white;
+    border-radius: 50%; /* Dumaloq qilish */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 136, 204, 0.5);
+    z-index: 1000; /* Hamma narsani ustida turishi uchun */
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
 
+/* Sichqoncha borganda kattalashish effekti */
+.telegram-float:hover {
+    transform: scale(1.1);
+    background-color: #0077b5;
+}
 
+/* Pulsatsiyalanuvchi (tirikdek) effekt */
+.telegram-float::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #0088cc;
+    opacity: 0.5;
+    z-index: -1;
+    animation: pulse 2s infinite;
+}
 
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1.6); opacity: 0; }
+}
 
-
-
-/* === Umumiy konteyner: pastki o‘ng burchakda joylashgan blok === */
-  .social-float {
-    position: fixed;            /* Ekranda doim bir joyda turadi (scroll qilinsa ham) */
-    right: 18px;                /* O‘ng tomondan 18px masofa */
-    bottom: 100px;               /* Pastdan 18px masofa */
-    display: flex;              /* Elementlarni yonma-yon yoki ustma-ust joylashtirish uchun flex qo‘llaydi */
-    flex-direction: column;     /* Ikonlarni ustma-ust joylashtiradi */
-    gap: 12px;                  /* Har ikki ikonka orasidagi masofa */
-    z-index: 9999;              /* Hammasidan yuqorida ko‘rinishi uchun */
-    pointer-events: none;       /* Konteyner o‘zi bosilmaydi, faqat ichidagi tugmalar bosiladi */
+/* === TELEFONDA JOYLASHUVNI TO'G'IRLASH (MUHIM) === */
+@media (max-width: 768px) {
+    .telegram-float {
+        width: 50px;  /* Telefonda biroz kichikroq */
+        height: 50px;
+        right: 20px;
+        
+        /* MUHIM JOYi: Pastki menyu balandligi (65px) + 20px joy tashlaymiz */
+        bottom: 90px; 
+    }
     
-  }
-  .social-float:hover {
-    transform: scale(1.05);
-  }
-
-  /* === Har bir ijtimoiy tarmoq tugmasining asosiy ko‘rinishi === */
-  .social-float a.sf-btn {
-    pointer-events: auto;       /* Tugma bosiladigan holatda bo‘ladi */
-    width: 54px;                /* Tugmaning eni */
-    height: 54px;               /* Tugmaning bo‘yi */
-    display: inline-flex;       /* Flex element sifatida markazlash imkonini beradi */
-    align-items: center;        /* Vertikal markazga joylashtiradi */
-    justify-content: center;    /* Gorizontal markazga joylashtiradi */
-    border-radius: 50%;         /* Tugmani dumaloq shaklga keltiradi */
-    text-decoration: none;      /* Ostiga chiziq chiqmasligi uchun */
-    color: white;               /* Tugma ichidagi svg (ikonka) oq rangda bo‘ladi */
-    box-shadow: 0 6px 18px rgba(0,0,0,0.28); /* Tugma atrofida soya hosil qiladi */
-    transform-origin: center;   /* Kattalashish markazdan bo‘lishini ta’minlaydi */
-    transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease; /* Silliq animatsiya o‘tishi */
-    backdrop-filter: blur(6px); /* Orqa fonni biroz xiralashtiradi */
-    -webkit-backdrop-filter: blur(6px); /* Safari uchun moslashtirilgan xiralashtirish */
-    background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(0,0,0,0.06)); /* Yumshoq shaffof fon gradienti */
-    border: 1px solid rgba(255,255,255,0.06); /* Yengil oq chiziqli chegara */
-    position: relative;         /* Tooltipni nisbatan joylashtirish uchun zarur */
-    overflow: visible;          /* Tooltip chiqib tursa ham ko‘rinishi uchun */
-    
-  }
-
-  /* === Telegram tugmasi uchun maxsus fon === */
-  .social-float a.sf-btn.telegram {
-    background: radial-gradient(circle at 30% 30%, #5eaef6 0%, #2a90dd 60%); /* Ko‘k gradient fon */
-    
-  }
-
-  /* === Instagram tugmasi uchun maxsus fon === */
-  .social-float a.sf-btn.instagram {
-    background: radial-gradient(circle at 30% 30%, #fc801b 0%, #dd2a7b 40%, #8134af 70%); /* Instagramning rangli gradienti */
-  }
-
-  /* === Tugmalar uchun suzib turuvchi (ko‘tarilib-pasayuvchi) animatsiya === */
-  @keyframes floatY {
-    from { transform: translateY(0); }  /* Boshlanish holati (pastda) */
-    to   { transform: translateY(-8px); } /* Biroz yuqoriga ko‘tariladi */
-  }
-
-  /* === Har bir tugmaga bu animatsiyani qo‘llaymiz === */
-  .social-float a.sf-btn {
-    animation: floatY 2.6s ease-in-out infinite alternate; /* 2.6 sekund davom etadi, cheksiz takrorlanadi */
-  }
-
-  /* Har bir tugma uchun kechikish vaqti farqli bo‘lishi uchun */
-  .social-float a.sf-btn:nth-child(1) { animation-delay: 0s; }  /* Telegram birinchi o‘ynaydi */
-  .social-float a.sf-btn:nth-child(2) { animation-delay: 0.18s; } /* Instagram biroz kechikib o‘ynaydi */
-
-  /* === Hover holati: sichqoncha ustiga kelsa effekti === */
-  .social-float a.sf-btn:hover,
-  .social-float a.sf-btn:focus {
-    transform: translateY(-6px) scale(1.07); /* Biroz kattalashadi va yuqoriga chiqadi */
-    box-shadow: 0 12px 30px rgba(0,0,0,0.36); /* So‘ya yanada kuchayadi */
-    outline: none;                           /* Tugma atrofi chizig‘ini olib tashlaydi */
-    filter: brightness(1.06);                /* Yorqinroq ko‘rinadi */
-  }
-
-  /* === SVG (ikonka) sozlamalari === */
-  .social-float a.sf-btn svg {
-    width: 24px;             /* Ikonka o‘lchami */
-    height: 24px;
-    display: block;
-    fill: white;             /* Rangini oq qiladi */
-  }
-
-  /* === Tooltip (yozuv) sozlamalari === */
-  .social-float a.sf-btn .tooltip {
-    position: absolute;              /* Tugmaga nisbatan joylashadi */
-    right: 70px;                     /* Chap tomonda chiqadi */
-    top: 50%;
-    transform: translateY(-50%) translateX(6px); /* Vertikal markazda joylashadi */
-    background: rgba(2, 40, 233, 0.518); /* Qora fon (yarim shaffof) */
-    color: #fff;                     /* Matn oq rangda */
-    padding: 6px 10px;               /* Ichki masofa */
-    border-radius: 6px;              /* Burchaklarni yumaloqlashtiradi */
-    font-size: 13px;                 /* Matn o‘lchami */
-    white-space: nowrap;             /* Matnni bir qatorda ushlab turadi */
-    box-shadow: 0 8px 22px rgba(0,0,0,0.28); /* Tooltip soya bilan */
-    opacity: 0;                      /* Dastlab ko‘rinmaydi */
-    pointer-events: none;            /* Tooltip bosilmaydi */
-    transition: opacity 0.18s ease, transform 0.18s ease; /* Silliq chiqish animatsiyasi */
-    z-index: 10000;
-  }
-
-  /* === Hoverda tooltip paydo bo‘ladi === */
-  .social-float a.sf-btn:hover .tooltip,
-  .social-float a.sf-btn:focus .tooltip {
-    opacity: 1;                      /* Ko‘rinadi */
-    transform: translateY(-50%) translateX(0); /* Joyidan chiqadi */
-  }
-
-  /* === Mobil ekranlar uchun moslashuv (responsive) === */
-  @media (max-width: 480px) {
-    .social-float { right: 12px; bottom: 12px; gap: 10px; } /* Masofani qisqartiradi */
-    .social-float a.sf-btn { width: 46px; height: 46px; }   /* Ikonkani kichraytiradi */
-    .social-float a.sf-btn svg { width: 20px; height: 20px; } /* SVG ni ham kichraytiradi */
-    .social-float a.sf-btn .tooltip { display: none; }       /* Mobilda tooltipni yashiradi */
-  }
+    /* Ikonka o'lchamini moslash */
+    .telegram-float svg {
+        width: 24px;
+        height: 24px;
+    }
+    footer{
+        display: none;
+    }
+}
