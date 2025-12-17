@@ -1,72 +1,46 @@
-/* ============================================================
-   === UMUMIY SOZLAMALAR (BODY) ===
-   Teg: <body> ... </body>
-   ============================================================ */
 body {
-  font-family: Arial, sans-serif; /* Sayt shriftini belgilaydi */
-  background: #ffffff; /* Orqa fon rangi */
-  margin: 0; /* Brauzerning standart bo'sh joyini olib tashlaydi */
-  padding: 20px; /* Sahifa chetiga ichki bo'sh joy beradi */
+  font-family: Arial, sans-serif; 
+  background: #ffffff;
+  margin: 0; 
+  padding: 20px; 
 }
-
-/* ============================================================
-   === HEADER (saytning yuqori qismi) ===
-   Teg: <header> ... </header>
-   ============================================================ */
 header {
-  display: flex; /* Elementlarni yonma-yon joylashtiradi */
-  justify-content: space-between; /* Logo va menyu orasida masofa yaratadi */
-  align-items: center; /* Vertikal markazlashtirish */
-  padding: 15px 40px; /* Ichki bo'sh joy */
-  position: sticky; /* Yuqoriga yopishadi */
-  top: 0; /* Ekran tepasida joylashadi */
-  z-index: 100; /* Boshqa elementlardan ustun turadi */
-  background: rgba(255, 255, 255, 0.1); /* Yarim shaffof oq fon */
-  backdrop-filter: blur(12px); /* Orqa fonni xiralashtiradi */
-  -webkit-backdrop-filter: blur(12px); /* Safari uchun */
-  border-radius: 16px; /* Burchaklarni yumaloqlash */
-  margin: 15px; /* Tashqi bo'sh joy */
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3); /* Pastga soyali effekt */
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 15px 40px; 
+  position: sticky; 
+  top: 0; 
+  z-index: 100; 
+  background: rgba(255, 255, 255, 0.1); 
+  backdrop-filter: blur(12px); 
+  -webkit-backdrop-filter: blur(12px); 
+  border-radius: 16px; 
+  margin: 15px; 
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3); 
 }
-
-/* ============================================================
-   === LOGO (rasm qismi) ===
-   Teg: <div class="logo"><img src="..."></div>
-   ============================================================ */
 .logo img {
-  width: 180px; /* Logotip kengligi */
+  width: 180px; 
 }
-
-/* ============================================================
-   === NAVIGATSIYA MENYUSI ===
-   Teg: <nav><ul><li><a>...</a></li></ul></nav>
-   ============================================================ */
 nav ul {
-  list-style: none; /* Ro'yxat belgilarini olib tashlaydi */
-  display: flex; /* Elementlarni yonma-yon joylashtiradi */
-  gap: 25px; /* Har bir element orasidagi masofa */
+  list-style: none; 
+  display: flex; 
+  gap: 25px; 
   margin: 0;
   padding: 0;
 }
-
 nav ul li a {
-  text-decoration: none; /* Tag chiziqni olib tashlaydi */
-  color: #000000; /* Matn rangi */
-  font-weight: 500; /* Qalinlik */
-  font-size: 16px; /* O‘lcham */
-  transition: color 0.3s ease; /* Hoverda silliq o‘tish */
+  text-decoration: none; 
+  color: #000000; 
+  font-weight: 500; 
+  font-size: 16px; 
+  transition: color 0.3s ease; 
 }
-
 nav ul li a:hover {
-  color: #ffca28; /* Sichqoncha ustiga borganda sariq rang */
+  color: #ffca28; 
 }
-
-/* ============================================================
-   === HAMBURGER ICON (mobil menyu belgisi) ===
-   Teg: <div class="hamburger"><span></span><span></span><span></span></div>
-   ============================================================ */
 .hamburger {
-  display: none; /* Asosiy ekranda ko‘rinmaydi */
+  display: none; 
   flex-direction: column;
   justify-content: space-between;
   width: 25px;
@@ -76,97 +50,61 @@ nav ul li a:hover {
 
 .hamburger span {
   display: block;
-  height: 3px; /* Har bir chiziqning qalinligi */
+  height: 3px; 
   width: 100%;
-  background: #ffffff; /* Oq rang */
+  background: #ffffff; 
   border-radius: 2px;
   transition: all 0.3s ease;
 }
 
-/* ============================================================
-   === KATALOG (GRID tuzilma) ===
-   Teg: <div class="noutbook-wrapper"> ... </div>
-   ============================================================ */
+
 .noutbook-wrapper {
-  display: grid; /* Grid tizimi */
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /* Har bir karta minimal 240px */
-  gap: 20px; /* Kartalar orasidagi masofa */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); 
+  gap: 20px; 
 }
-
-/* ============================================================
-   === NOUTBUK KARTASI ===
-   Teg: <div class="noutbook"> ... </div>
-   ============================================================ */
 .noutbook {
-  background: #fff; /* Oq fon */
-    border-radius: 14px; /* Yumaloq burchaklar */
-    box-shadow: 0 0px 15px rgba(0,0,0,0.8); /* Soyali effekt */
-    padding: 15px; /* Ichki bo'shliq */
-    text-align: center; /* Matnni markazlash */
+  background: #fff; 
+    border-radius: 14px; 
+    box-shadow: 0 0px 15px rgba(0,0,0,0.8); 
+    padding: 15px; 
+    text-align: center; 
 }
-
 .noutbook:hover {
-  transform: scale(1.02); /* Hoverda kattalashadi */
+  transform: scale(1.02); 
 }
-
-/* ============================================================
-   === NOUTBUK RASMI ===
-   Teg: <img src="...">
-   ============================================================ */
 .noutbook img {
-  width: 100%; /* Rasm kartani to‘liq egallaydi */
-  height: 200px; /* Rasm balandligi */
-  object-fit: cover; /* Nisbatni buzmasdan joylash */
-  border-radius: 12px; /* Rasm burchaklarini yumaloqlash */
+  width: 100%; 
+  height: 200px; 
+  object-fit: cover; 
+  border-radius: 12px; 
 }
-
-/* ============================================================
-   === NOUTBUK NOMI ===
-   Teg: <h4> ... </h4>
-   ============================================================ */
 .noutbook h4 {
-  font-size: 17px; /* Matn o‘lchami */
-  font-weight: 600; /* Qalin yozuv */
-  margin: 15px 10px 5px; /* Ichki masofa */
+  font-size: 17px; 
+  font-weight: 600; 
+  margin: 15px 10px 5px; 
 }
-
-/* ============================================================
-   === NARX QISMI ===
-   Teg: <p class="price"> ... </p>
-   ============================================================ */
 .price {
-  color: #4b00ff; /* Binafsha rang */
-  font-weight: bold; /* Qalin matn */
-  font-size: 16px; /* Matn o‘lchami */
-  margin-bottom: 10px; /* Pastdan joy */
+  color: #4b00ff; 
+  font-weight: bold; 
+  font-size: 16px; 
+  margin-bottom: 10px; 
 }
-
-/* ============================================================
-   === TUGMA ===
-   Teg: <button class="btm"> ... </button>
-   ============================================================ */
 .btm {
-  width: 100%; /* Tugma kartaning kengligiga teng */
-  padding: 10px; /* Ichki bo'sh joy */
-  background: #025effda; /* Tugma foni */
-  border: none; /* Chegarasiz */
-  color: #ffffff; /* Matn oq */
-  border-radius: 10px; /* Yumaloq burchak */
-  font-size: 14px; /* Matn o‘lchami */
-  cursor: pointer; /* Sichqoncha bosganda pointer */
-  transition: .2s; /* Animatsiya */
+  width: 100%; 
+  padding: 10px; 
+  background: #025effda; 
+  border: none; 
+  color: #ffffff; 
+  border-radius: 10px; 
+  font-size: 14px; 
+  cursor: pointer; 
+  transition: .2s; 
 }
-
 .btm:hover {
-  background: #002b99; /* Hoverda fon to‘qroq */
-  transform: scale(1.05); /* Kattalashadi */
+  background: #002b99; 
+  transform: scale(1.05); 
 }
-
-/* ============================================================
-   === RESPONSIVE DIZAYN ===
-   Ekran o‘lchamlariga moslashtirish (MEDIA QUERY)
-   ============================================================ */
-
 /* 🖥️ 1440px dan kichik ekranlar */
 @media (max-width: 1440px) {
   .noutbook-wrapper {
@@ -177,7 +115,6 @@ nav ul li a:hover {
     height: 180px;
   }
 }
-
 /* 💻 1024px (planshet va kichik noutbuklar) */
 @media (max-width: 1024px) {
   header {
@@ -193,22 +130,21 @@ nav ul li a:hover {
     padding: 25px 30px;
   }
 }
-
 /* 📲 768px (planshetlar) */
 @media (max-width: 768px) {
   header {
-    flex-direction: column; /* Elementlar ustma-ust joylashadi */
+    flex-direction: column; 
     gap: 10px;
     padding: 10px 15px;
   }
   header ul {
     flex-direction: row;
-    flex-wrap: wrap; /* Joy yetmasa yangi qatorda davom etadi */
-    justify-content: center; /* Markazga joylashadi */
+    flex-wrap: wrap; 
+    justify-content: center; 
     gap: 10px;
   }
   .noutbook-wrapper {
-    grid-template-columns: 1fr; /* Har qatorga bitta mahsulot */
+    grid-template-columns: 1fr; 
     gap: 12px;
   }
   .noutbook img {
