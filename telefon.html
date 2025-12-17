@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Telefonlar</title>
   <link rel="stylesheet" href="telefon.css">
-  <link rel="icon" type="image/png" href="favicon.png">
 </head>
 <body>
   <!-- HEADER -->
@@ -13,12 +12,19 @@
     <div  class="logo">
       <img src="logo.png" alt="TopMaxsulotMarket Logotip" width="300">
     </div>
+
+    <div class="search-container">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Mahsulot nomini yozing ">
+        </div>
+        <div id="searchResults" class="search-results"></div>
+      </div>
+
     <nav>
       <ul>
         <li><a href="index.html">🏠 Bosh sahifa</a></li>
         <li><a href="katalog.html">☰ Mahsulotlar katalogi</a></li>
         <li><a href="savat.html">🛒Savat</a></li>
-        <li><a href="login.html">👤Kirish</a></li>
       </ul>
     </nav>
   </header>
@@ -267,7 +273,7 @@
 </div>
 
 </div>
-
+<!-- ================= SAVATGA QO'SHISH KODI  ================= -->
 <script>
 let cart = JSON.parse(localStorage.getItem('cart_v1')) || [];
 
@@ -283,7 +289,6 @@ document.querySelectorAll('.add-to-cart').forEach(btn=>{
       qty: 1
     };
 
-    // Agar mahsulot savatda bo‘lsa — qty++
     let exist = cart.find(p => p.id === item.id);
     if (exist) {
       exist.qty++;
@@ -293,11 +298,94 @@ document.querySelectorAll('.add-to-cart').forEach(btn=>{
 
     localStorage.setItem('cart_v1', JSON.stringify(cart));
     
-    alert("✅ Mahsulot savatga qo'shildi!");
-    window.location.href = "savat.html"; // Savat sahifasiga o'tadi
+    alert("✅ Maxsulot savatga qo'shildi!");
+    window.location.href = "savat.html";
   });
+});
+</script>
+<!--=====SAVATGA QO'SHISH KODI TUGADI=====-->
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById("searchInput");
+    const searchResults = document.getElementById("searchResults");
+    const productCards = document.querySelectorAll(".telefon");
+
+    // 1. Barcha mahsulotlarni o'qib olish va ID biriktirish
+    let products = [];
+    productCards.forEach((card, index) => {
+        // Agar ID bo'lmasa, vaqtinchalik ID beramiz
+        if (!card.id) {
+            card.id = "product-idx-" + index;
+        }
+        
+        const title = card.querySelector("h4").innerText;
+        const img = card.querySelector("img").src;
+        
+        products.push({
+            id: card.id,
+            title: title,
+            img: img,
+            element: card
+        });
+    });
+
+    // 2. Qidiruv funksiyasi
+    searchInput.addEventListener("input", function(e) {
+        const text = e.target.value.toLowerCase();
+        searchResults.innerHTML = ""; // Avvalgi natijalarni tozalash
+
+        if (text.length === 0) {
+            searchResults.style.display = "none";
+            return;
+        }
+
+        // Mos keluvchi mahsulotlarni filtrlash
+        const filtered = products.filter(product => 
+            product.title.toLowerCase().includes(text)
+        );
+
+        if (filtered.length > 0) {
+            searchResults.style.display = "block";
+            filtered.forEach(product => {
+                const div = document.createElement("div");
+                div.innerHTML = `
+                    <img src="${product.img}" alt="">
+                    <span>${product.title}</span>
+                `;
+                
+                // Natija bosilganda
+                div.addEventListener("click", () => {
+                    // 1. Qidiruvni tozalash
+                    searchResults.style.display = "none";
+                    searchInput.value = "";
+                    
+                    // 2. O'sha mahsulotga borish (Scroll)
+                    const targetElement = document.getElementById(product.id);
+                    targetElement.scrollIntoView({ behavior: "smooth", block: "center" });
+
+                    // 3. Highlight effekti berish
+                    targetElement.classList.add("highlight");
+                    setTimeout(() => {
+                        targetElement.classList.remove("highlight");
+                    }, 2000);
+                });
+
+                searchResults.appendChild(div);
+            });
+        } else {
+            searchResults.style.display = "none";
+        }
+    });
+
+    // Tashqariga bosilganda qidiruv oynasini yopish
+    document.addEventListener("click", function(e) {
+        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = "none";
+        }
+    });
 });
 </script>
 </body>
 </html>
-
