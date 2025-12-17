@@ -1,13 +1,13 @@
-// === KONFIGURATSIYA (O'zingiznikini qo'ying) ===
-const BOT_TOKEN = "8399989077:AAGjnF1-MYvE06jQ9Bu6WOr9cMoDNzH21Dc"; // BotFather bergan token
-const CHAT_ID = "6481290484"; // O'zingizning ID raqamingiz (userinfobot orqali olinadi)
+// === KONFIGURATSIYA ===
+const BOT_TOKEN = "8399989077:AAGjnF1-MYvE06jQ9Bu6WOr9cMoDNzH21Dc";
+const CHAT_ID = "6481290484";
 
 // === O'ZGARUVCHILAR ===
 let cart = JSON.parse(localStorage.getItem('cart_v1')) || [];
 let coupon = null;
-let userLocation = null; // Lokatsiya koordinatalari (latitude, longitude)
+let userLocation = null;
 
-// Pulni formatlash
+// Pul formatlash
 const money = v => new Intl.NumberFormat('ru-RU').format(v) + " so'm";
 
 // === 1. SAVATNI CHIZISH ===
@@ -18,9 +18,12 @@ function renderCart() {
 
     if (!cart || cart.length === 0) {
         empty.classList.remove('hidden');
-        updateSummary(0, 0);
+        document.getElementById('items-count').innerText = 0;
+        document.getElementById('subtotal').innerText = "0 so'm";
+        document.getElementById('shipping-text').innerText = "0 so'm";
         return;
     }
+
     empty.classList.add('hidden');
 
     cart.forEach(item => {
@@ -31,11 +34,15 @@ function renderCart() {
             <div class="flex-1">
                 <h4 class="font-medium">${item.title}</h4>
                 <p class="text-sm text-gray-500">${money(item.price)}</p>
+
                 <div class="flex items-center mt-2 gap-3">
                     <button onclick="changeQty('${item.id}', -1)" class="px-2 border rounded">-</button>
                     <span>${item.qty}</span>
                     <button onclick="changeQty('${item.id}', 1)" class="px-2 border rounded">+</button>
-                    <button onclick="removeItem('${item.id}')" class="ml-auto text-red-500 text-sm">O'chirish</button>
+
+                    <button onclick="removeItem('${item.id}')" class="ml-auto text-red-500 text-sm">
+                        O'chirish
+                    </button>
                 </div>
             </div>
         `;
@@ -45,7 +52,7 @@ function renderCart() {
     updateTotals();
 }
 
-// === MIQDOR O'ZGARTIRISH ===
+// === 2. MIQDORNI O‘ZGARTIRISH ===
 function changeQty(id, delta) {
     cart = cart.map(it => {
         if (it.id == id) it.qty = Math.max(1, it.qty + delta);
@@ -64,19 +71,22 @@ function removeItem(id) {
 function updateTotals() {
     const subtotalVal = cart.reduce((s, i) => s + i.price * i.qty, 0);
     const shipping = subtotalVal > 100000 ? 0 : 12000;
-    let discount = coupon ? Math.round(subtotalVal * coupon.discount) : 0;
+    const discount = coupon ? Math.round(subtotalVal * coupon.discount) : 0;
     const total = subtotalVal - discount + shipping;
 
-    document.getElementById('items-count').innerText = cart.reduce((s, i) => s + i.qty, 0);
+    document.getElementById('items-count').innerText =
+        cart.reduce((s, i) => s + i.qty, 0);
+
     document.getElementById('subtotal').innerText = money(total);
-    document.getElementById('shipping-text').innerText = shipping === 0 ? 'Bepul' : money(shipping);
+    document.getElementById('shipping-text').innerText =
+        shipping === 0 ? "Bepul" : money(shipping);
 }
 
 function saveCart() {
     localStorage.setItem('cart_v1', JSON.stringify(cart));
 }
 
-// === 2. MODAL VA GEOLOKATSIYA ===
+// === 3. MODAL & LOKATSIYA ===
 const modal = document.getElementById('order-modal');
 const checkoutBtn = document.getElementById('checkout-btn');
 const closeBtn = document.querySelector('.close-modal');
@@ -96,52 +106,55 @@ closeBtn.addEventListener('click', () => {
     modal.classList.remove('flex');
 });
 
-// LOKATSIYANI OLISH (GPS)
+// LOKATSIYA
 locationBtn.addEventListener('click', () => {
     if (!navigator.geolocation) {
-        locationStatus.innerText = "Brauzeringiz geolokatsiyani qo'llab quvvatlamaydi.";
+        locationStatus.innerText = "Geolokatsiya qo'llanilmaydi.";
         return;
     }
 
-    locationStatus.innerText = "⏳ Lokatsiya aniqlanmoqda...";
-    
+    locationStatus.innerText = "⏳ Lokatsiya olinmoqda...";
+
     navigator.geolocation.getCurrentPosition(
-        (position) => {
+        pos => {
             userLocation = {
-                lat: position.coords.latitude,
-                lon: position.coords.longitude
+                lat: pos.coords.latitude,
+                lon: pos.coords.longitude
             };
-            locationStatus.innerHTML = `✅ Lokatsiya olindi! <br> <span class="text-xs text-blue-600">(${userLocation.lat.toFixed(4)}, ${userLocation.lon.toFixed(4)})</span>`;
-            locationBtn.classList.replace('bg-blue-500', 'bg-green-500');
+
+            locationStatus.innerHTML = `✅ Lokatsiya olindi!
+                <br><span class="text-xs text-blue-600">
+                (${userLocation.lat.toFixed(4)}, ${userLocation.lon.toFixed(4)})
+                </span>`;
+
+            locationBtn.classList.replace("bg-blue-500", "bg-green-500");
             locationBtn.innerText = "Manzil belgilandi";
         },
-        (error) => {
-            locationStatus.innerText = "❌ Lokatsiyani olib bo'lmadi. Ruxsat bering yoki qayta urinib ko'ring.";
-            console.error(error);
+        err => {
+            locationStatus.innerText = "❌ Lokatsiya olinmadi.";
+            console.error(err);
         }
     );
 });
 
-// === 3. TELEGRAMGA YUBORISH ===
+// === 4. TELEGRAMGA YUBORISH ===
 async function sendTelegram() {
     const name = document.getElementById('client-name').value;
     const phone = document.getElementById('client-phone').value;
 
-    // === TELEFON TEKSHIRUV ===
-let cleanedPhone = phone.replace(/\s/g, ""); // bo'shliqlarni olib tashlash
-
-if (!cleanedPhone.match(/^\+998\d{9}$/)) {
-    alert("Telefon raqam noto'g'ri! Masalan: +998901234567");
-    return;
-}
-    // Lokatsiya tekshiruvi
-
-    if (!userLocation) {
-        alert("Iltimos, yetkazib berish manzilini belgilash uchun 'Joylashuvni belgilash' tugmasini bosing!");
+    // Telefon validatsiya
+    let cleanedPhone = phone.replace(/\s/g, "");
+    if (!cleanedPhone.match(/^\+998\d{9}$/)) {
+        alert("Telefon noto'g'ri: +998901234567");
         return;
     }
 
-    // 1. Mahsulotlar ro'yxatini matn qilish
+    if (!userLocation) {
+        alert("Joylashuvni belgilang!");
+        return;
+    }
+
+    // Buyurtma matni
     let message = `<b>📦 YANGI BUYURTMA!</b>\n\n`;
     message += `👤 <b>Mijoz:</b> ${name}\n`;
     message += `📞 <b>Telefon:</b> ${cleanedPhone}\n\n`;
@@ -151,27 +164,24 @@ if (!cleanedPhone.match(/^\+998\d{9}$/)) {
         message += `${index + 1}. ${item.title} (x${item.qty}) - ${money(item.price * item.qty)}\n`;
     });
 
-    const totalText = document.getElementById('subtotal').innerText;
-    message += `\n💰 <b>JAMI: ${totalText}</b>`;
+    message += `\n💰 <b>JAMI: ${document.getElementById('subtotal').innerText}</b>`;
 
-    // 2. Xabarni yuborish
     try {
-        const textUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-        await fetch(textUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+        // Matn yuborish
+        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
                 chat_id: CHAT_ID,
                 text: message,
-                parse_mode: 'HTML'
+                parse_mode: "HTML"
             })
         });
 
-        // 3. Lokatsiyani yuborish
-        const locUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendLocation`;
-        await fetch(locUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+        // Lokatsiya yuborish
+        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendLocation`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
                 chat_id: CHAT_ID,
                 latitude: userLocation.lat,
@@ -179,50 +189,56 @@ if (!cleanedPhone.match(/^\+998\d{9}$/)) {
             })
         });
 
-        alert("✅ Buyurtmangiz qabul qilindi! Qayta urinmang Tez orada aloqaga chiqamiz.");
-        
-        // Savatni tozalash va modalni yopish
-        localStorage.removeItem('cart_v1');
-        cart = [];
-        renderCart();
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-        document.getElementById('telegram-form').reset();
-        locationBtn.classList.replace('bg-green-500', 'bg-blue-500');
-        locationBtn.innerText = "📍 Joylashuvni belgilash";
-        userLocation = null;
+        alert("✅ Buyurtma qabul qilindi! Tez orada aloqaga chiqamiz!");
 
-        } 
-    catch (error) {
-        alert("❌ Xatolik yuz berdi. Internetni tekshiring.");
-        console.error(error);
+        // Hammasini tozalash
+        clearAll();
+
+    } catch (err) {
+        alert("❌ Xatolik: Internetni tekshiring!");
+        console.error(err);
     }
 }
 
-// Dastlabki ishga tushirish
+// === 5. SAVATNI TO‘ZALASH FUNKSIYASI ===
+function clearAll() {
+    localStorage.removeItem('cart_v1');
+    cart = [];
+    renderCart();
+
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+
+    document.getElementById('telegram-form').reset();
+
+    locationBtn.classList.replace("bg-green-500", "bg-blue-500");
+    locationBtn.innerText = "📍 Joylashuvni belgilash";
+    userLocation = null;
+}
+
+// Savatni tozalash tugmasi
+document.getElementById('clear-cart').addEventListener('click', clearAll);
+
+// Boshlang'ich yuklash
 renderCart();
+
 
 // === TELEFON MASKASI ===
 const phoneInput = document.getElementById("client-phone");
 
-// +998 bilan boshlash
 phoneInput.addEventListener("focus", () => {
-    if (phoneInput.value === "") {
-        phoneInput.value = "+998 ";
-    }
+    if (phoneInput.value === "") phoneInput.value = "+998 ";
 });
 
-// Har yozilgan belgini formatlash
 phoneInput.addEventListener("input", () => {
-    let v = phoneInput.value.replace(/\D/g, ""); // Faqat raqamlar
-    if (!v.startsWith("998")) v = "998" + v;     // +998 majburiy
+    let v = phoneInput.value.replace(/\D/g, "");
+    if (!v.startsWith("998")) v = "998" + v;
 
-    let formatted = "+998 ";
+    let f = "+998 ";
+    if (v.length > 3) f += v.slice(3, 5);
+    if (v.length > 5) f += " " + v.slice(5, 8);
+    if (v.length > 8) f += " " + v.slice(8, 10);
+    if (v.length > 10) f += " " + v.slice(10, 12);
 
-    if (v.length > 3) formatted += v.substring(3, 5);
-    if (v.length > 5) formatted += " " + v.substring(5, 8);
-    if (v.length > 8) formatted += " " + v.substring(8, 10);
-    if (v.length > 10) formatted += " " + v.substring(10, 12);
-
-    phoneInput.value = formatted.trim();
+    phoneInput.value = f.trim();
 });
