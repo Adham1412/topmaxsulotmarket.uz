@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Noutbuklar</title>
   <link rel="stylesheet" href="noutbook.css">
-  <link rel="icon" type="image/png" href="favicon.png">
 </head>
 <body>
   <!-- HEADER -->
@@ -18,7 +17,6 @@
         <li><a href="index.html">🏠 Bosh sahifa</a></li>
         <li><a href="katalog.html">☰ Mahsulotlar katalogi</a></li>
         <li><a href="savat.html">🛒Savat</a></li>
-        <li><a href="login.html">👤Kirish</a></li>
       </ul>
     </nav>
   </header>
@@ -108,35 +106,37 @@
 
 </div>
 
-<script>
-let cart = JSON.parse(localStorage.getItem('cart_v1')) || [];
+    <!-- ================= SAVATGA QO'SHISH KODI  ================= -->
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart_v1')) || [];
 
-document.querySelectorAll('.add-to-cart').forEach(btn=>{
-  btn.addEventListener('click', function(e){
-    e.preventDefault();
+    document.querySelectorAll('.add-to-cart').forEach(btn=>{
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
     
-    const item = {
-      id: this.dataset.id,
-      title: this.dataset.title,
-      img: this.dataset.img,
-      price: Number(this.dataset.price),
-      qty: 1
-    };
+      const item = {
+        id: this.dataset.id,
+        title: this.dataset.title,
+        img: this.dataset.img,
+        price: Number(this.dataset.price),
+        qty: 1
+      };
 
-    let exist = cart.find(p => p.id === item.id);
-    if (exist) {
-      exist.qty++;
-    } else {
-      cart.push(item);
-    }
+      let exist = cart.find(p => p.id === item.id);
+        if (exist) {
+        exist.qty++;
+      } 
+      else {
+        cart.push(item);
+      }
 
-    localStorage.setItem('cart_v1', JSON.stringify(cart));
+      localStorage.setItem('cart_v1', JSON.stringify(cart));
     
-    alert("✅ Noutbuk savatga qo'shildi!");
-    window.location.href = "savat.html";
+        alert("✅ Maxsulot savatga qo'shildi!");
+        window.location.href = "savat.html";
+      });
   });
-});
-</script>
+  </script>
+        <!-- ================= SAVATGA QO'SHISH KODI TUGADI ================= -->
 </body>
 </html>
-
