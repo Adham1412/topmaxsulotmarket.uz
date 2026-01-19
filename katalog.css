@@ -54,7 +54,6 @@ header ul li a:hover {
   text-shadow: 0 0 10px #ffb703; /* Yorqin effekt */
 }
 
-
 /* ===== ASOSIY QISM (MAIN) ===== */
 .main {
   display: flex; /* Yonma-yon joylashuv */
@@ -143,399 +142,562 @@ header ul li a:hover {
   flex: 1; /* Bo‘sh joyni to‘liq egallaydi */
 }
 
-/* Mahsulotlar grid tartibida */
+/* Qidiruv konteyneri */
+.search-container {
+  position: relative;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 0 15px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  border: 2px solid #ddd;
+  border-radius: 50px;
+  overflow: hidden;
+  background: #fff;
+  transition: 0.3s;
+}
+
+.search-box:focus-within {
+  border-color: #007bff;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
+}
+
+.search-box input {
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+.search-box button {
+  padding: 12px 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* Qidiruv natijalari ro'yxati */
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 15px;
+  right: 15px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
+  display: none; /* Dastlab yashirin */
+}
+
+.search-results div {
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: 0.2s;
+}
+
+.search-results div:hover {
+  background-color: #f8f9fa;
+  color: #007bff;
+}
+
+.search-results img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+/* === MAHSULOTLAR GRID === */
+/* Desktop uchun: 3-4 qator */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Har xil ekran o‘lchamiga mos */
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 20px 0;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-/* Mahsulot kartasi */
+/* === MAHSULOT KARTASI === */
 .product-card {
-  background: #fff; /* Oq fon */
-    border-radius: 14px; /* Yumaloq burchaklar */
-    box-shadow: 0 0px 15px rgba(0,0,0,0.8); /* Soyali effekt */
-    padding: 15px; /* Ichki bo'shliq */
-    text-align: center; /* Matnni markazlash */
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-/* Hoverda mahsulot kartasiga effekt */
 .product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-/* Mahsulot rasmi */
 .product-card img {
   width: 100%;
-  height: 53%;
-  object-fit: cover; /* Rasm o‘lchamiga moslashadi */
+  height: 180px;
+  object-fit: contain;
   border-radius: 10px;
+  margin-bottom: 15px;
+  background: #f8f9fa;
+  padding: 10px;
 }
 
-/* Narx belgisi */
-.price {
+.product-card h3 {
+  margin: 10px 0;
+  font-size: 18px;
+  color: #333;
+  line-height: 1.3;
+}
+
+.product-card .desc {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 10px;
+  line-height: 1.4;
+  flex-grow: 1;
+}
+
+.product-card .price {
   color: #4A3AFF;
   font-weight: 600;
+  font-size: 1.2rem;
+  margin: 10px 0;
 }
 
-/* Umumiy tugmalar */
-.btn {
-  width: 100%; /* Tugma kartaga mos kenglikda */
-  padding: 10px; /* Ichki bo‘sh joy */
-  background: #025effda; /* Tugma foni */
-  border: none; /* Chegara yo‘q */
-  color: #fff; /* Matn rangi oq */
-  border-radius: 10px; /* Burchaklar yumaloq */
-  font-size: 14px; /* Tugma matni o‘lchami */
-  cursor: pointer; /* Sichqoncha bosganda pointer paydo bo‘ladi */
-  transition: .2s; /* Animatsiya */
+.product-card .btn {
+  width: 100%;
+  padding: 12px;
+  background: #025effda;
+  border: none;
+  color: #fff;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: .2s;
+  margin-top: auto;
+  font-weight: 500;
 }
 
-.btn:hover {
-  background: #002b99; /* Tugma rangi o‘zgaradi */
-  transform: scale(1.05); /* Tugma kattalashadi */
+.product-card .btn:hover {
+  background: #002b99;
+  transform: scale(1.05);
 }
 
+/* Topilgan mahsulotni belgilash effekti */
+@keyframes highlightAnim {
+  0% { transform: scale(1); box-shadow: 0 0 0 rgba(0, 123, 255, 0); }
+  50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 123, 255, 0.5); border: 2px solid #007bff; }
+  100% { transform: scale(1); box-shadow: 0 0 0 rgba(0, 123, 255, 0); }
+}
+
+.product-card.highlight {
+  animation: highlightAnim 1.5s ease-in-out;
+}
 
 /* ===== ANIMATSIYA ===== */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-5px); }
   to { opacity: 1; transform: translateY(0); }
 }
-.mobile-bottom-nav {
-    display: none; /* Dastlab yashirilgan */
-}
-@media (max-width: 768px) {
 
-  header {
-  width: calc(100% + 340px); /* 60px ga kengayadi */
-  margin-right: -60px; /* Ortiqcha kengayishni tashqariga chiqaradi */
-  position: sticky;
-  top: 0;
-  background: white;
-  border-bottom: 1px solid #ddd; /* Pastda chiziq */
-  padding: 0;
-}
-nav{
-  display: none;
-}
-header ul {
-  list-style: none;
+/* === TELEGRAM TUGMASI === */
+.telegram-float {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 100px;
+  height: 100px;
+  background-color: #0088cc;
+  color: white;
+  border-radius: 50%;
   display: flex;
   justify-content: center;
-  align-items: flex-end; /* Pastga joylashtiradi */
-  gap: 30px;
-  height: 60px; /* Menyu balandligi */
-  margin: 0;
-  padding: 0;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 136, 204, 0.5);
+  z-index: 1000;
+  transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
-
-  header ul li {
-    margin: 8px 0; /* Har bir menyu orasida vertikal masofa */
-  }
-
-  header ul li a {
-    font-size: 16px; /* Telefon ekranida matn biroz kattaroq ko‘rinadi */
-  }
-
-  /* === MAHSULOTLAR BLOKINI TARTIBGA SOLUVCHI KONTEYNER === */
-.product-grid {
-  display: grid; /* Elementlarni grid (katakli) tartibda joylashtiradi */
-  grid-template-columns: repeat(2, 1fr); /* 2 ta ustun yaratadi, har biri teng kenglikda */
-  gap: 70px; /* Kartalar orasidagi masofa */
-  padding: 25px; /* Ichki bo‘sh joy (konteyner ichidagi chet masofasi) */
-  max-width: 1200px; /* Umumiy konteyner kengligi */
-  margin: 0 auto; /* Butun konteynerni markazga joylashtiradi */
-}
-
-/* === HAR BIR MAHSULOT KARTASI (BLOK) UCHUN === */
-.product-card {
-  width: 80%; /* Kartaning to‘liq kengligini egallaydi */
-  background: #fff; /* Orqa fon oq rangda */
-  border-radius: 10px; /* Burchaklarni yumaloqlashtiradi */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Yengil soya berib, kartani ko‘tarib ko‘rsatadi */
-  text-align: center; /* Ichidagi matnni markazda joylashtiradi */
-  padding: 40px ; /* Ichki bo‘shliq — rasm va matn chetga yopishmaydi */
-  transition: transform 0.3s ease; /* Hover holatidagi harakatni yumshatib ko‘rsatadi */
-}
-
-/* === SICHQONCHA USTIGA KELGANDA EFFEKTI === */
-.product-card:hover {
-  transform: translateY(-5px); /* Kartani biroz yuqoriga ko‘taradi */
-}
-
-/* === MAHSULOT RASMI UCHUN === */
-.product-card img {
-  width: 100%; /* Rasm kartaning to‘liq kengligini egallaydi */
-  height: 180px; /* Rasmning balandligini 180px qilib belgilaydi */
-  object-fit: cover; /* Rasm nisbatini buzmasdan to‘ldiradi */
-  border-radius: 8px; /* Rasm burchaklarini yumaloqlashtiradi */
-}
-
-/* === MAHSULOT NOMI (Sarlavhasi) UCHUN === */
-.product-card h3 {
-  margin: 10px 0; /* Yuqoridan va pastdan 10px masofa */
-  font-size: 18px; /* Shrift o‘lchami 18px */
-  color: #333; /* Matn rangi to‘q kulrang */
-}
-
-/* === MAHSULOT TAVSIFI UCHUN === */
-.product-card .desc {
-  color: #666; /* Matn rangi biroz och kulrang */
-  font-size: 14px; /* Tavsif uchun kichikroq shrift */
-}
-
-/* === MAHSULOT NARXI UCHUN === */
-.product-card .price {
-  color: #007bff; /* Narxni ko‘k rangda ko‘rsatadi */
-  font-weight: bold; /* Qalin shrift */
-  margin: 10px 0; /* Yuqori va past masofa 10px */
-}
-
-/* === “SAVATGA QO‘SHISH” TUGMASI UCHUN === */
-.product-card .btn {
-  background: #007bff; /* Tugma foni ko‘k rangda */
-  color: #fff; /* Matn oq rangda */
-  border: none; /* Tugmaga chegara chizig‘i qo‘yilmaydi */
-  padding: 8px 14px; /* Ichki bo‘shliq — matn tugma chetiga tegmaydi */
-  border-radius: 6px; /* Tugma burchaklari yumaloq */
-  cursor: pointer; /* Sichqoncha ustiga kelganda kursorni “qo‘lcha”ga aylantiradi */
-  font-size: 14px; /* Tugmadagi matn o‘lchami 14px */
-}
-
-/* === TUGMA HOVER HOLATIDA === */
-.product-card .btn:hover {
-  background: #0056b3; /* Tugma ustiga bosilganda yoki sichqoncha kelsa, fon quyuqlashadi */
-}
-
-/* --- MOBIL MENYU (YOPISHIB TURADI) --- */
-    .mobile-bottom-nav {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        
-        /* ENG MUHIM QISM: QOTIRISH */
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 65px;
-        
-        /* iPhone X va yangilar uchun pastdan joy */
-        padding-bottom: env(safe-area-inset-bottom);
-        box-sizing: content-box;
-
-        /* Dizayn  */
-        background: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        box-shadow: 0 -4px 15px rgba(154, 12, 12, 0.5);
-        
-        z-index: 999999; /* Hamma narsani ustida */
-    }
-
-    .mobile-bottom-nav .nav-link {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        flex-grow: 1;
-        text-decoration: none;
-        color: #777;
-        font-size: 11px;
-        font-weight: 500;
-    }
-
-    .mobile-bottom-nav .nav-link .nav-icon {
-        font-size: 24px;
-        margin-bottom: 3px;
-        line-height: 1;
-    }
-
-    .mobile-bottom-nav .nav-link.active {
-        color: #000000;
-    }
-
-    /* --- ELEMENTLARNI MOSLASHTIRISH --- */
-    .banner {
-        margin: 15px;
-        padding: 50px 15px;
-    }
-
-    .banner h1 {
-        font-size: 2.0em;
-    }
-
-    .product-grid {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .product-card {
-        width: 90%;
-        max-width: 350px;
-        /* Mobilda hover effekti xalaqit bermasligi uchun o'chiramiz yoki kamaytiramiz */
-        transform: none !important; 
-    }
-    login-header{
-        display: none;
-    }
-}
-
-/* Kichik telefonlar uchun */
-@media (max-width: 480px) {
-    .banner h1 {
-        font-size: 1.6em;
-    }
-}
-/* === TELEGRAM TUGMASI DIZAYNI === */
-.telegram-float {
-    position: fixed;
-    bottom: 30px; /* Kompyuterda pastdan masofa */
-    right: 30px;  /* O'ngdan masofa */
-    width: 100px;
-    height: 100px;
-    background-color: #0088cc; /* Telegram rangi */
-    color: white;
-    border-radius: 50%; /* Dumaloq qilish */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0, 136, 204, 0.5);
-    z-index: 1000; /* Hamma narsani ustida turishi uchun */
-    transition: transform 0.3s ease;
-    cursor: pointer;
-}
-
-/* Sichqoncha borganda kattalashish effekti */
 .telegram-float:hover {
-    transform: scale(1.1);
-    background-color: #0077b5;
+  transform: scale(1.1);
+  background-color: #0077b5;
 }
 
-/* Pulsatsiyalanuvchi (tirikdek) effekt */
 .telegram-float::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: #0088cc;
-    opacity: 0.5;
-    z-index: -1;
-    animation: pulse 2s infinite;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #0088cc;
+  opacity: 0.5;
+  z-index: -1;
+  animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); opacity: 0.7; }
-    100% { transform: scale(1.6); opacity: 0; }
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.6); opacity: 0; }
 }
 
-/* === TELEFONDA JOYLASHUVNI TO'G'IRLASH === */
+/* === MOBIL NAVIGATSIYA === */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 65px;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+  z-index: 999999;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: env(safe-area-inset-bottom);
+  box-sizing: content-box;
+}
+
+.mobile-bottom-nav .nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  text-decoration: none;
+  color: #777;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.mobile-bottom-nav .nav-link .nav-icon {
+  font-size: 24px;
+  margin-bottom: 3px;
+  line-height: 1;
+}
+
+.mobile-bottom-nav .nav-link.active {
+  color: #000000;
+}
+
+/* ============ MEDIA QUERIES (MOSLASHUVCHANLIK) ============ */
+
+/* Tablet (768px - 1024px) */
+@media (max-width: 1024px) {
+  .main {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .sidebar {
+    width: 94%;
+    position: static;
+  }
+  
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr); /* Tablet: 3 qator */
+    gap: 20px;
+  }
+  
+  header {
+    margin: 10px;
+    padding: 15px 20px;
+  }
+  
+  header ul li {
+    margin-left: 15px;
+  }
+}
+
+/* Mobile (768px gacha) - BU YERDA 2 QATOR BO'LISHI KERAK */
 @media (max-width: 768px) {
-    .telegram-float {
-        width: 50px;  /* Telefonda biroz kichikroq */
-        height: 50px;
-        right: 20px;
-        
-        /* MUHIM JOYi: Pastki menyu balandligi (65px) + 20px joy tashlaymiz */
-        bottom: 90px; 
-    }
-    
-    /* Ikonka o'lchamini moslash */
-    .telegram-float svg {
-        width: 24px;
-        height: 24px;
-    }
-}
-
-/* Qidiruv konteyneri */
-.search-container {
-    position: relative;
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 0 15px;
-}
-
-.search-box {
+  .main {
+    padding: 15px;
+    gap: 15px;
+  }
+  
+  header {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+    margin: 10px;
+  }
+  
+  header ul {
+    display: none; /* Desktop menyu yashiriladi */
+  }
+  
+  /* MOBIL MENYU KO'RSATILADI */
+  .mobile-bottom-nav {
     display: flex;
-    align-items: center;
-    border: 2px solid #ddd;
-    border-radius: 50px;
-    overflow: hidden;
-    background: #fff;
-    transition: 0.3s;
-}
-
-.search-box:focus-within {
-    border-color: #007bff;
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
-}
-
-.search-box input {
-    width: 100%;
-    padding: 12px 20px;
-    border: none;
-    outline: none;
+  }
+  
+  body {
+    padding-bottom: 70px; /* Pastki navigatsiya uchun joy */
+  }
+  
+  .products, .sidebar {
+    padding: 13px;
+  }
+  
+  /* MUHIM: Mobil uchun 2 qator */
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 QATOR */
+    gap: 15px;
+    padding: 15px 0;
+  }
+  
+  .product-card {
+    padding: 15px;
+  }
+  
+  .product-card img {
+    height: 140px;
+  }
+  
+  .product-card h3 {
     font-size: 16px;
+  }
+  
+  .product-card .desc {
+    font-size: 13px;
+  }
+  
+  .product-card .price {
+    font-size: 1.1rem;
+  }
+  
+  .product-card .btn {
+    padding: 10px;
+    font-size: 13px;
+  }
+  
+  /* TELEGRAM TUGMASI */
+  .telegram-float {
+    width: 50px;
+    height: 50px;
+    right: 20px;
+    bottom: 85px; /* Pastki menyudan yuqorida */
+  }
+  
+  .telegram-float svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .telegram-float::before {
+    display: none; /* Mobile'da pulsatsiyani o'chiramiz */
+  }
+  
+  /* QIDIRUV QUTISI */
+  .search-container {
+    padding: 0 10px;
+  }
+  
+  .search-box {
+    flex-direction: column;
+    border-radius: 15px;
+  }
+  
+  .search-box input {
+    border-radius: 15px 15px 0 0;
+    padding: 12px;
+  }
+  
+  .search-box button {
+    border-radius: 0 0 15px 15px;
+    padding: 12px;
+    width: 100%;
+  }
+  
+  .search-results {
+    left: 10px;
+    right: 10px;
+  }
 }
 
-.search-box button {
-    padding: 12px 20px;
-    background: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-}
-
-/* Qidiruv natijalari ro'yxati */
-.search-results {
-    position: absolute;
-    top: 100%;
-    left: 15px;
+/* Kichik mobil telefon (576px gacha) */
+@media (max-width: 576px) {
+  .logo img {
+    max-height: 60px;
+  }
+  
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 QATOR saqlanadi */
+    gap: 12px;
+  }
+  
+  .product-card {
+    padding: 12px;
+  }
+  
+  .product-card img {
+    height: 120px;
+  }
+  
+  .product-card h3 {
+    font-size: 15px;
+    margin: 8px 0;
+  }
+  
+  .product-card .desc {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+  
+  .product-card .price {
+    font-size: 1rem;
+    margin: 8px 0;
+  }
+  
+  .product-card .btn {
+    padding: 9px;
+    font-size: 12px;
+  }
+  
+  .sidebar h2 {
+    font-size: 1.1rem;
+  }
+  
+  .category-btn {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+  
+  .telegram-float {
+    bottom: 80px;
     right: 15px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    z-index: 1000;
-    max-height: 300px;
-    overflow-y: auto;
-    display: none; /* Dastlab yashirin */
+    width: 45px;
+    height: 45px;
+  }
+  
+  .telegram-float svg {
+    width: 22px;
+    height: 22px;
+  }
 }
 
-.search-results div {
-    padding: 10px 15px;
-    border-bottom: 1px solid #eee;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
+/* Juda kichik ekranlar (480px gacha) */
+@media (max-width: 480px) {
+  header {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 12px;
+  }
+  
+  .main {
+    padding: 10px;
+  }
+  
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 QATOR saqlanadi */
     gap: 10px;
-    transition: 0.2s;
+  }
+  
+  .product-card {
+    padding: 10px;
+  }
+  
+  .product-card img {
+    height: 100px;
+  }
+  
+  .product-card h3 {
+    font-size: 14px;
+  }
+  
+  .product-card .desc {
+    font-size: 11px;
+  }
+  
+  .product-card .btn {
+    padding: 8px;
+    font-size: 11px;
+  }
+  
+  .mobile-bottom-nav {
+    height: 60px;
+  }
+  
+  .mobile-bottom-nav .nav-icon {
+    font-size: 22px;
+  }
+  
+  .mobile-bottom-nav .nav-text {
+    font-size: 10px;
+  }
+  
+  .telegram-float {
+    bottom: 75px;
+    right: 10px;
+  }
 }
 
-.search-results div:hover {
-    background-color: #f8f9fa;
-    color: #007bff;
+/* Landscape orientatsiyada mobil */
+@media (max-height: 500px) and (orientation: landscape) {
+  .mobile-bottom-nav {
+    display: none;
+  }
+  
+  body {
+    padding-bottom: 20px;
+  }
+  
+  .telegram-float {
+    bottom: 20px;
+  }
+  
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr); /* Landscape'da 3 qator */
+    gap: 10px;
+  }
+  
+  .product-card img {
+    height: 90px;
+  }
 }
 
-.search-results img {
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-    border-radius: 5px;
+/* Katta ekranlar (1400px+) */
+@media (min-width: 1400px) {
+  .main {
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+  
+  .product-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
 }
 
-/* Topilgan mahsulotni belgilash effekti */
-@keyframes highlightAnim {
-    0% { transform: scale(1); box-shadow: 0 0 0 rgba(0, 123, 255, 0); }
-    50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 123, 255, 0.5); border: 2px solid #007bff; }
-    100% { transform: scale(1); box-shadow: 0 0 0 rgba(0, 123, 255, 0); }
-}
-
-.product-card.highlight {
-    animation: highlightAnim 1.5s ease-in-out;
+/* Juda katta ekranlar (1920px+) */
+@media (min-width: 1920px) {
+  .main {
+    max-width: 1800px;
+  }
+  
+  .product-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 35px;
+  }
 }
