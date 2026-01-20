@@ -416,7 +416,7 @@ header ul li a:hover {
   
   .product-grid {
     grid-template-columns: repeat(3, 1fr); /* Tablet: 3 qator */
-    gap: 20px;
+    gap: 20 px;
   }
   
   header {
@@ -472,7 +472,11 @@ header ul li a:hover {
   }
   
   .product-card img {
-    height: 140px;
+    width: 80%;             /* Rasm eni konteynerga moslashadi */
+    height: 120px;           /* Balandlikni qat'iy belgilang 
+    object-fit: contain;     /* Rasm qirqilmasdan, to'liq ko'rinadi va proporsiyasi saqlanadi */
+    display: block;          /* Blok elementga aylantirish */
+    margin: 0 auto;          /* Agar flex ishlamasa, bu markazga olib keladi */
   }
   
   .product-card h3 {
@@ -488,7 +492,7 @@ header ul li a:hover {
   }
   
   .product-card .btn {
-    padding: 10px;
+    padding: 5px;
     font-size: 13px;
   }
   
@@ -511,23 +515,28 @@ header ul li a:hover {
   
   /* QIDIRUV QUTISI */
   .search-container {
-    padding: 0 10px;
+    padding:  1%;
   }
   
+  
+
   .search-box {
     flex-direction: column;
-    border-radius: 15px;
+    border-radius: 20px;
   }
   
   .search-box input {
-    border-radius: 15px 15px 0 0;
-    padding: 12px;
+    border-radius: 10px 10px 0 0;
+    padding: 12px 20px 12px 150px;
   }
   
   .search-box button {
-    border-radius: 0 0 15px 15px;
-    padding: 12px;
+    border-radius: 0 0 10px 10px;
+    padding: 3px;
     width: 100%;
+    cursor: pointer;
+    border: none;
+    
   }
   
   .search-results {
@@ -539,7 +548,7 @@ header ul li a:hover {
 /* Kichik mobil telefon (576px gacha) */
 @media (max-width: 576px) {
   .logo img {
-    max-height: 60px;
+    max-height: 70px;
   }
   
   .product-grid {
@@ -700,4 +709,32 @@ header ul li a:hover {
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 35px;
   }
+}
+
+.product-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+
+  height: auto !important;
+  min-height: unset !important;
+  overflow: visible !important;
+
+  padding: 15px;
+  gap: 1%;
+  box-sizing: border-box;
+}
+
+/* RASM BLOKI */
+.product-card img {
+  display: block;
+  width: 80%;
+  max-width: 160px;
+  height: 110px;
+
+  object-fit: contain;
+
+  margin: 0 auto 12px;
+  flex-shrink: 0;
 }
