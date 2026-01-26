@@ -86,3 +86,32 @@ button:hover {
     background: #113dad; /* Tugma rangi o'zgaradi */
     transform: scale(1.05); /* Tugma kattalashadi */
 }
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  header {
+    margin: auto;
+    flex-direction: column;
+    gap: 15px;
+    font-size: 10%;
+    height: 100px;
+    width: 100%;
+    padding: 2px 1px 1px 0px;
+  }
+  .logo img {
+    width: 200px;
+    height: auto;
+
+  }
+ 
+  header ul li a {
+    font-size: 12px;
+    text-align: center;
+  }
+}
+
+@media(max-width:480px){
+  .telefon-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
