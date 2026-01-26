@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Erkaklar kiyimlari</title>
+  <link rel="stylesheet" href="erkaklar-kiyimlari.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="TopMaxsulotMarket" width="280">
+  </div>
+
+  <div class="search-container">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Kiyim nomini yozing">
+    </div>
+    <div id="searchResults" class="search-results"></div>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">🏠 Bosh sahifa</a></li>
+      <li><a href="katalog.html">☰ Katalog</a></li>
+      <li><a href="savat.html">🛒 Savat</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ERKAKLAR KIYIMLARI -->
+<div class="telefon-wrapper">
+
+  <div class="telefon">
+    <img src="https://images.uzum.uz/d0i1l527s4fo7mq95a0g/original.jpg">
+    <h4>Erkaklar futbolkasi (Cotton)</h4>
+    <p class="price">149 000 so‘m</p>
+    <button class="add-to-cart"
+      data-id="201"
+      data-title="Erkaklar futbolkasi (Cotton)"
+      data-img="https://images.uzum.uz/d0i1l527s4fo7mq95a0g/original.jpg"
+      data-price="149000">
+      Savatga qo‘shish
+    </button>
+  </div>
+
+  <div class="telefon">
+    <img src="https://images.uzum.uz/co9fn872u18gghcnlgj0/original.jpg">
+    <h4>Erkaklar klassik ko‘ylagi</h4>
+    <p class="price">259 000 so‘m</p>
+    <button class="add-to-cart"
+      data-id="202"
+      data-title="Erkaklar klassik ko‘ylagi"
+      data-img="https://images.uzum.uz/co9fn872u18gghcnlgj0/original.jpg"
+      data-price="259000">
+      Savatga qo‘shish
+    </button>
+  </div>
+
+  <div class="telefon">
+    <img src="https://images.uzum.uz/cga4047hgiov1qiep4h0/original.jpg">
+    <h4>Erkaklar jinsi shim</h4>
+    <p class="price">399 000 so‘m</p>
+    <button class="add-to-cart"
+      data-id="203"
+      data-title="Erkaklar jinsi shim"
+      data-img="https://images.uzum.uz/cga4047hgiov1qiep4h0/original.jpg"
+      data-price="399000">
+      Savatga qo‘shish
+    </button>
+  </div>
+
+  <div class="telefon">
+    <img src="https://avatars.mds.yandex.net/get-mpic/18677324/2a0000019bc699ab8d239024a783d0ca8a83/orig">
+    <h4>Erkaklar sport kostyumi</h4>
+    <p class="price">689 000 so‘m</p>
+    <button class="add-to-cart"
+      data-id="204"
+      data-title="Erkaklar sport kostyumi"
+      data-img="https://avatars.mds.yandex.net/get-mpic/18677324/2a0000019bc699ab8d239024a783d0ca8a83/orig"
+      data-price="689000">
+      Savatga qo‘shish
+    </button>
+  </div>
+
+</div>
+
+<!-- ===== SAVAT KODI ===== -->
+<script>
+let cart = JSON.parse(localStorage.getItem('cart_v1')) || [];
+
+document.querySelectorAll('.add-to-cart').forEach(btn=>{
+  btn.addEventListener('click', function(e){
+    e.preventDefault();
+
+    const item = {
+      id: this.dataset.id,
+      title: this.dataset.title,
+      img: this.dataset.img,
+      price: Number(this.dataset.price),
+      qty: 1
+    };
+
+    let exist = cart.find(p => p.id === item.id);
+    exist ? exist.qty++ : cart.push(item);
+
+    localStorage.setItem('cart_v1', JSON.stringify(cart));
+    alert("✅ Mahsulot savatga qo‘shildi!");
+    window.location.href = "savat.html";
+  });
+});
+</script>
+
+<!-- ===== QIDIRUV ===== -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const input = document.getElementById("searchInput");
+  const results = document.getElementById("searchResults");
+  const cards = document.querySelectorAll(".telefon");
+
+  let products = [];
+  cards.forEach((c,i)=>{
+    c.id = "product-"+i;
+    products.push({
+      id: c.id,
+      title: c.querySelector("h4").innerText,
+      img: c.querySelector("img").src,
+      el: c
+    });
+  });
+
+  input.addEventListener("input", e=>{
+    let t = e.target.value.toLowerCase();
+    results.innerHTML = "";
+    if(!t){ results.style.display="none"; return;}
+
+    products.filter(p=>p.title.toLowerCase().includes(t))
+      .forEach(p=>{
+        let d=document.createElement("div");
+        d.innerHTML=`<img src="${p.img}"><span>${p.title}</span>`;
+        d.onclick=()=>{
+          p.el.scrollIntoView({behavior:"smooth",block:"center"});
+          p.el.classList.add("highlight");
+          setTimeout(()=>p.el.classList.remove("highlight"),1500);
+          results.style.display="none";
+          input.value="";
+        }
+        results.appendChild(d);
+        results.style.display="block";
+      });
+  });
+});
+</script>
+
+</body>
+</html>

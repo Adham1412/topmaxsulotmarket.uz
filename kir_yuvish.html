@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kir yuvish mashinalari</title>
+  <link rel="stylesheet" href="kir_yuvish.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="TopMaxsulotMarket" width="280">
+  </div>
+
+  <div class="search-container">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Kir yuvish mashinasi nomini yozing">
+    </div>
+    <div id="searchResults" class="search-results"></div>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">🏠 Bosh sahifa</a></li>
+      <li><a href="katalog.html">☰ Katalog</a></li>
+      <li><a href="savat.html">🛒 Savat</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- KIR YUVISH MASHINALARI -->
+<div class="telefon-wrapper">
+
+  <div class="telefon">
+    <img src="https://cdn.mediapark.uz/imgs/6fda72fb-64e6-46ee-aeda-45fb5607aadd_Artboard-2.webp">
+    <h4>LG F2J3HS2W (7kg)</h4>
+    <p class="price">4 200 000 so‘m</p>
+    <button class="add-to-cart"
+      data-id="301"
+      data-title="LG F2J3HS2W (7kg)"
+      data-img="https://cdn.mediapark.uz/imgs/6fda72fb-64e6-46ee-aeda-45fb5607aadd_Artboard-2.webp"
+      data-price="4200000">
+      Savatga qo‘shish
+    </button>
+  </div>
+
+  <div class="telefon">
+    <img src="https://images.uzum.uz/d2e8d7r4eu2hrb2poqfg/feedback_40.jpg">
+    <h4>Samsung WW60A (6kg)</h4>
+    <p class="price">3 900 000 so‘m</p>
+    <button class="add-to-cart"
+      data-id="302"
+      data-title="Samsung WW60A (6kg)"
+      data-img="https://images.uzum.uz/d2e8d7r4eu2hrb2poqfg/feedback_40.jpg"
+      data-price="3900000">
+      Savatga qo‘shish
+    </button>
+  </div>
+
+  <div class="telefon">
+    <img src="https://images.uzum.uz/d4dgmnmj76ooegrlcsgg/original.jpg">
+    <h4>Beko WRE6511 (6kg)</h4>
+    <p class="price">3 500 000 so‘m</p>
+    <button class="add-to-cart"
+      data-id="303"
+      data-title="Beko WRE6511 (6kg)"
+      data-img="https://images.uzum.uz/d4dgmnmj76ooegrlcsgg/original.jpg"
+      data-price="3500000">
+      Savatga qo‘shish
+    </button>
+  </div>
+
+  <div class="telefon">
+    <img src="https://images.uzum.uz/d2rtq852llnd6jukg1lg/original.jpg">
+    <h4>Artel TG80P (8kg)</h4>
+    <p class="price">3 150 000 so‘m</p>
+    <button class="add-to-cart"
+      data-id="304"
+      data-title="Artel TG80P (8kg)"
+      data-img="https://images.uzum.uz/d2rtq852llnd6jukg1lg/original.jpg"
+      data-price="3150000">
+      Savatga qo‘shish
+    </button>
+  </div>
+
+</div>
+
+<!-- ===== SAVAT KODI ===== -->
+<script>
+let cart = JSON.parse(localStorage.getItem('cart_v1')) || [];
+
+document.querySelectorAll('.add-to-cart').forEach(btn=>{
+  btn.addEventListener('click', function(e){
+    e.preventDefault();
+
+    const item = {
+      id: this.dataset.id,
+      title: this.dataset.title,
+      img: this.dataset.img,
+      price: Number(this.dataset.price),
+      qty: 1
+    };
+
+    let exist = cart.find(p => p.id === item.id);
+    exist ? exist.qty++ : cart.push(item);
+
+    localStorage.setItem('cart_v1', JSON.stringify(cart));
+    alert("✅ Mahsulot savatga qo‘shildi!");
+    window.location.href = "savat.html";
+  });
+});
+</script>
+
+<!-- ===== QIDIRUV ===== -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const input = document.getElementById("searchInput");
+  const results = document.getElementById("searchResults");
+  const cards = document.querySelectorAll(".telefon");
+
+  let products = [];
+  cards.forEach((c,i)=>{
+    c.id = "product-"+i;
+    products.push({
+      id: c.id,
+      title: c.querySelector("h4").innerText,
+      img: c.querySelector("img").src,
+      el: c
+    });
+  });
+
+  input.addEventListener("input", e=>{
+    let t = e.target.value.toLowerCase();
+    results.innerHTML = "";
+    if(!t){ results.style.display="none"; return;}
+
+    products.filter(p=>p.title.toLowerCase().includes(t))
+      .forEach(p=>{
+        let d=document.createElement("div");
+        d.innerHTML=`<img src="${p.img}"><span>${p.title}</span>`;
+        d.onclick=()=>{
+          p.el.scrollIntoView({behavior:"smooth",block:"center"});
+          p.el.classList.add("highlight");
+          setTimeout(()=>p.el.classList.remove("highlight"),1500);
+          results.style.display="none";
+          input.value="";
+        }
+        results.appendChild(d);
+        results.style.display="block";
+      });
+  });
+});
+</script>
+
+</body>
+</html>
