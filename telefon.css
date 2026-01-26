@@ -142,6 +142,10 @@ header ul li a:hover {
     font-size: 13px; /* Tugma matni kichikroq bo'ladi */
     padding: 9px; /* Tugma balandligini moslaydi */
   }
+  .logo img {
+    width: 200px;
+    height: auto;
+
 }
 
 /* Telefonlar (480px gacha) */
@@ -163,7 +167,10 @@ header ul li a:hover {
   header ul li {
     margin: 0; /* Default margin olib tashlanadi */
   }
-
+  header ul li a {
+    font-size: 12px;
+    text-align: center;
+  }
   .telefon-wrapper {
     grid-template-columns: 1fr; /* Har qatorga bitta mahsulot kartasi */
     gap: 12px; /* Masofa kichikroq */
@@ -182,13 +189,13 @@ header ul li a:hover {
     padding: 8px; /* Tugma balandligi mos holatda bo'ladi */
   }
 }
-
+}
 /* Qidiruv konteyneri */
 .search-container {
     position: relative;
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 0 15px;
+    max-width: 220px;
+    margin: 2px auto;
+    padding: 1px 10px 1px 0;
 }
 
 .search-box {
@@ -211,7 +218,7 @@ header ul li a:hover {
     padding: 12px 20px;
     border: none;
     outline: none;
-    font-size: 16px;
+    font-size: 12px;
 }
 
 .search-box button {
