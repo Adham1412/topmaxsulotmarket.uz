@@ -67,14 +67,14 @@ header ul li a:hover {
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-  padding: 20px;
+  padding: 18px;
   position: sticky; /* Yuqoriga yopishadi */
   top: 150px; /* Ekran tepasidan masofa */
   height: fit-content; /* Balansli balandlik */
 }
 
 .sidebar h2 {
-  font-size: 18px;
+  font-size: 30px;
   color: #4A3AFF;
   margin-bottom: 15px;
 }
@@ -218,7 +218,9 @@ header ul li a:hover {
   object-fit: cover;
   border-radius: 5px;
 }
-
+.mashhur h2{
+  padding: 0 0 0 50px;
+}
 /* === MAHSULOTLAR GRID === */
 /* Desktop uchun: 3-4 qator */
 .product-grid {
@@ -226,7 +228,7 @@ header ul li a:hover {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 25px;
   padding: 20px 0;
-  max-width: 1400px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -240,7 +242,7 @@ header ul li a:hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100%; 
 }
 
 .product-card:hover {
