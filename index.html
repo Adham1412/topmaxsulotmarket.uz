@@ -8,15 +8,14 @@
   <link rel="icon" type="image/png" href="favicon.png">
 
   <style>
-    /* === 1. KIRISH OYNASI STILI (DARVOZA) === */
     #login-screen {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: #ffffff; /* Oq fon */
-        z-index: 9999; /* Hammasining ustida turadi */
+        background-color: #ffffff;
+        z-index: 9999;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -26,7 +25,7 @@
     }
 
     #site-content {
-        display: none; /* Sayt boshida YASHIRIN bo'ladi */
+        display: none;
     }
 
     .google-btn {
@@ -55,9 +54,111 @@
         height: 30px;
         animation: spin 1s linear infinite;
         margin-bottom: 20px;
-        display: none; /* Boshida ko'rinmaydi */
+        display: none;
     }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); /* Orqa fonni xiralashtirish */
+        display: none; /* Boshida yashirin */
+        justify-content: center;
+        align-items: center;
+        z-index: 5000;
+        backdrop-filter: blur(5px);
+        animation: fadeIn 0.3s ease;
+    }
+
+    .profile-card {
+        background: white;
+        width: 90%;
+        max-width: 400px;
+        border-radius: 20px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        position: relative;
+        animation: slideUp 0.3s ease;
+    }
+
+    .close-modal {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 28px;
+        font-weight: bold;
+        color: #888;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .close-modal:hover { color: #333; }
+
+    .profile-img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 4px solid #4285F4;
+        object-fit: cover;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 10px rgba(66, 133, 244, 0.3);
+    }
+
+    .profile-name {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .profile-email {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 25px;
+        background: #f0f2f5;
+        padding: 5px 10px;
+        border-radius: 15px;
+        display: inline-block;
+    }
+
+    .profile-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .action-btn {
+        padding: 12px;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .btn-logout {
+        background-color: #ffebee;
+        color: #d32f2f;
+    }
+    .btn-logout:hover { background-color: #ffcdd2; }
+
+    .btn-orders {
+        background-color: #e3f2fd;
+        color: #1976d2;
+    }
+    .btn-orders:hover { background-color: #bbdefb; }
+
+    /* Animatsiyalar */
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
   </style>
 
 </head>
@@ -94,9 +195,9 @@
             <span class="nav-icon">🛒</span>
             <span class="nav-text">Savat</span>
         </a>
-        <a href="#" class="nav-link" id="mobile-logout-btn">
-            <span class="nav-icon">🚪</span>
-            <span class="nav-text">Chiqish</span>
+        <a href="#" class="nav-link open-profile-btn">
+            <span class="nav-icon">👤</span>
+            <span class="nav-text">Kabinet</span>
         </a>
       </nav>
 
@@ -109,8 +210,7 @@
             <li><a href="index.html">🏠 Bosh sahifa</a></li> 
             <li><a href="katalog.html">☰ Mahsulotlar katalogi</a></li> 
             <li><a href="savat.html">🛒Savat</a></li> 
-            <li><a href="#" id="user-display-name">👤 Kabinet</a></li>
-            <li><a href="#" id="desktop-logout-btn" style="color: red;">Chiqish</a></li>
+            <li><a href="#" id="desktop-profile-btn">👤 Kabinet</a></li>
           </ul>
         </nav>
       </header>
@@ -139,9 +239,9 @@
 
 
           <div class="product-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYRiajmfPPtcXaMTP56rvSbYGlHlzAo6_Ywg&s" alt="Smart soat">
-            <h3>Poyabzallar</h3>
-            <a href="poyabzallar.html" class="btm">Mahsulotlarga o'tish</a>
+            <img src="https://i.ytimg.com/vi/n2ESb5IoD48/sddefault.jpg" alt="Erkaklar-kiyimlari">
+            <h3></h3>
+            <a href="erkaklar-kiyimlari.html" class="btm">Mahsulotlarga o'tish</a>
           </div>
           
         </div>
@@ -157,7 +257,25 @@
         <p>&copy; 2025 TopMaxsulotMarket. Barcha huquqlar himoyalangan.</p>
       </footer>
 
-  </div> <script>
+  </div> 
+
+  <div id="profile-modal" class="modal-overlay">
+    <div class="profile-card">
+        <span class="close-modal" id="close-profile">&times;</span>
+        
+        <img id="modal-user-img" src="https://via.placeholder.com/100" alt="User" class="profile-img">
+        <h2 id="modal-user-name" class="profile-name">Foydalanuvchi</h2>
+        <div id="modal-user-email" class="profile-email">email@example.com</div>
+
+        <div class="profile-actions">
+            <button id="modal-logout-btn" class="action-btn btn-logout">
+                🚪 Tizimdan chiqish
+            </button>
+        </div>
+    </div>
+  </div>
+
+  <script>
     let cart = JSON.parse(localStorage.getItem('cart_v1')) || []; 
     document.querySelectorAll('.add-to-cart').forEach(btn=>{
       btn.addEventListener('click', function(e){
@@ -186,56 +304,62 @@
       appId: "1:856799738566:web:e11409aa25bfb1317975c7",
       measurementId: "G-WM4FELQ9K4"
     };
-    // Firebaseni ishga tushirish
+
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
 
-    // Elementlarni olamiz
+   
     const loginScreen = document.getElementById('login-screen');
     const siteContent = document.getElementById('site-content');
     const loginBtn = document.getElementById('google-login-btn');
     const loader = document.getElementById('loader');
     
-    // Foydalanuvchi ismini chiqarish uchun
-    const userDisplayName = document.getElementById('user-display-name');
+    
     const welcomeText = document.getElementById('welcome-text');
-    const mobileLogout = document.getElementById('mobile-logout-btn');
-    const desktopLogout = document.getElementById('desktop-logout-btn');
 
-    // 1. HOLATNI TEKSHIRISH (Darvozabon)
+    
+    const profileModal = document.getElementById('profile-modal');
+    const closeProfileBtn = document.getElementById('close-profile');
+    const desktopProfileBtn = document.getElementById('desktop-profile-btn');
+    const mobileProfileBtns = document.querySelectorAll('.open-profile-btn');
+    
+    const modalUserImg = document.getElementById('modal-user-img');
+    const modalUserName = document.getElementById('modal-user-name');
+    const modalUserEmail = document.getElementById('modal-user-email');
+    const modalLogoutBtn = document.getElementById('modal-logout-btn');
+
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            // Agar foydalanuvchi kirgan bo'lsa:
             console.log("Foydalanuvchi tizimda: ", user.displayName);
             
-            // Login oynasini yo'qotamiz, saytni ochamiz
             loginScreen.style.display = 'none';
             siteContent.style.display = 'block';
 
-            // Ismini saytga yozib qo'yamiz
-            userDisplayName.textContent = "👤 " + user.displayName;
             welcomeText.textContent = "Xush kelibsiz, " + user.displayName + "!";
             
+            modalUserName.textContent = user.displayName;
+            modalUserEmail.textContent = user.email;
+            if(user.photoURL) {
+                modalUserImg.src = user.photoURL;
+            }
+
+            desktopProfileBtn.textContent = "👤 " + user.displayName;
+
         } else {
-            // Agar foydalanuvchi kirmagan bo'lsa:
             console.log("Foydalanuvchi yo'q");
-            
-            // Login oynasini ko'rsatamiz, saytni yashiramiz
             loginScreen.style.display = 'flex';
             siteContent.style.display = 'none';
         }
     });
 
-    // 2. KIRISH TUGMASI BOSILGANDA
+
     loginBtn.addEventListener('click', () => {
-        loader.style.display = 'block'; // Aylanadigan narsa chiqadi
-        loginBtn.style.display = 'none'; // Tugma yo'qoladi
+        loader.style.display = 'block';
+        loginBtn.style.display = 'none';
 
         signInWithPopup(auth, provider)
-            .then((result) => {
-                // Muvaffaqiyatli o'tdi, onAuthStateChanged o'zi saytni ochadi
-            })
+            .then((result) => { })
             .catch((error) => {
                 console.error(error);
                 alert("Xatolik: " + error.message);
@@ -244,21 +368,40 @@
             });
     });
 
-    // 3. CHIQISH FUNKSIYASI (LOGOUT)
-    function logoutUser() {
+
+    modalLogoutBtn.addEventListener('click', () => {
         if(confirm("Tizimdan chiqmoqchimisiz?")) {
             signOut(auth).then(() => {
-                // Chiqib ketganda avtomatik login oynasi qaytib keladi
+                profileModal.style.display = 'none'; // Modalni yopish
                 alert("Siz tizimdan chiqdingiz!");
             });
         }
+    });
+
+    // === 4. MODAL OCHISH VA YOPISH LOGIKASI ===//
+    
+    function openModal(e) {
+        e.preventDefault();
+        profileModal.style.display = 'flex';
     }
 
-    mobileLogout.addEventListener('click', logoutUser);
-    desktopLogout.addEventListener('click', logoutUser);
+    desktopProfileBtn.addEventListener('click', openModal);
+
+    mobileProfileBtns.forEach(btn => {
+        btn.addEventListener('click', openModal);
+    });
+
+    closeProfileBtn.addEventListener('click', () => {
+        profileModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === profileModal) {
+            profileModal.style.display = 'none';
+        }
+    });
 
   </script>
 
 </body>
 </html>
-
