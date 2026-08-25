@@ -1,4 +1,6 @@
 // === KONFIGURATSIYA ===
+// DIQQAT: Telegram bot tokenini frontendda saqlash xavfsiz emas.
+// Keyingi bosqichda tokenni server/Cloud Function orqali yuborishga o'tkazish kerak.
 const BOT_TOKEN = "8399989077:AAGjnF1-MYvE06jQ9Bu6WOr9cMoDNzH21Dc";
 const CHAT_ID = "6481290484";
 
@@ -6,8 +8,13 @@ const CHAT_ID = "6481290484";
 let cart = JSON.parse(localStorage.getItem('cart_v1')) || [];
 let coupon = null;
 let userLocation = null;
+let locationWatchId = null;
+let locationSamples = [];
 
-// Pul formatlash
+const LOCATION_TIMEOUT = 30000;
+const MAX_ACCEPTED_ACCURACY = 100;
+const MIN_SAMPLES = 3;
+
 const money = v => new Intl.NumberFormat('ru-RU').format(v) + " so'm";
 
 // === 1. SAVATNI CHIZISH ===
@@ -34,15 +41,11 @@ function renderCart() {
             <div class="flex-1">
                 <h4 class="font-medium">${item.title}</h4>
                 <p class="text-sm text-gray-500">${money(item.price)}</p>
-
                 <div class="flex items-center mt-2 gap-3">
                     <button onclick="changeQty('${item.id}', -1)" class="px-2 border rounded">-</button>
                     <span>${item.qty}</span>
                     <button onclick="changeQty('${item.id}', 1)" class="px-2 border rounded">+</button>
-
-                    <button onclick="removeItem('${item.id}')" class="ml-auto text-red-500 text-sm">
-                        O'chirish
-                    </button>
+                    <button onclick="removeItem('${item.id}')" class="ml-auto text-red-500 text-sm">O'chirish</button>
                 </div>
             </div>
         `;
@@ -52,7 +55,6 @@ function renderCart() {
     updateTotals();
 }
 
-// === 2. MIQDORNI O‘ZGARTIRISH ===
 function changeQty(id, delta) {
     cart = cart.map(it => {
         if (it.id == id) it.qty = Math.max(1, it.qty + delta);
@@ -74,90 +76,149 @@ function updateTotals() {
     const discount = coupon ? Math.round(subtotalVal * coupon.discount) : 0;
     const total = subtotalVal - discount + shipping;
 
-    document.getElementById('items-count').innerText =
-        cart.reduce((s, i) => s + i.qty, 0);
-
+    document.getElementById('items-count').innerText = cart.reduce((s, i) => s + i.qty, 0);
     document.getElementById('subtotal').innerText = money(total);
-    document.getElementById('shipping-text').innerText =
-        shipping === 0 ? "Bepul" : money(shipping);
+    document.getElementById('shipping-text').innerText = shipping === 0 ? "Bepul" : money(shipping);
 }
 
 function saveCart() {
     localStorage.setItem('cart_v1', JSON.stringify(cart));
 }
 
-// === 3. MODAL & LOKATSIYA ===
+// === 2. MODAL ===
 const modal = document.getElementById('order-modal');
 const checkoutBtn = document.getElementById('checkout-btn');
 const closeBtn = document.querySelector('.close-modal');
 const locationBtn = document.getElementById('get-location');
 const locationStatus = document.getElementById('location-status');
 
-// Modalni ochish
 checkoutBtn.addEventListener('click', () => {
     if (cart.length === 0) return alert("Savat bo'sh!");
     modal.classList.remove('hidden');
     modal.classList.add('flex');
 });
 
-// Modalni yopish
 closeBtn.addEventListener('click', () => {
+    stopLocationWatch();
     modal.classList.add('hidden');
     modal.classList.remove('flex');
 });
 
-// LOKATSIYA
+// === 3. ANIQLIGI YUQORI LOKATSIYA ===
+function stopLocationWatch() {
+    if (locationWatchId !== null) {
+        navigator.geolocation.clearWatch(locationWatchId);
+        locationWatchId = null;
+    }
+}
+
+function setBestLocation(position) {
+    const { latitude, longitude, accuracy } = position.coords;
+
+    if (!Number.isFinite(latitude) || !Number.isFinite(longitude) || !Number.isFinite(accuracy)) return;
+    if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) return;
+
+    locationSamples.push({ lat: latitude, lon: longitude, accuracy });
+    locationSamples.sort((a, b) => a.accuracy - b.accuracy);
+    locationSamples = locationSamples.slice(0, 5);
+
+    const best = locationSamples[0];
+    userLocation = { lat: best.lat, lon: best.lon, accuracy: best.accuracy };
+
+    locationStatus.innerHTML = `⏳ Aniqlik tekshirilmoqda...<br>
+        <span class="text-xs text-blue-600">Aniqlik: ±${Math.round(best.accuracy)} m</span>`;
+
+    // Kamida 3 ta o'lchov va 100 metrdan yaxshi aniqlik bo'lgandagina qabul qilamiz.
+    if (locationSamples.length >= MIN_SAMPLES && best.accuracy <= MAX_ACCEPTED_ACCURACY) {
+        stopLocationWatch();
+        locationStatus.innerHTML = `✅ Aniq lokatsiya belgilandi!<br>
+            <span class="text-xs text-green-600">Aniqlik: ±${Math.round(best.accuracy)} m</span>`;
+        locationBtn.classList.remove('bg-blue-500');
+        locationBtn.classList.add('bg-green-500');
+        locationBtn.innerText = "✅ Manzil belgilandi";
+    }
+}
+
+function handleLocationError(err) {
+    stopLocationWatch();
+    userLocation = null;
+
+    const messages = {
+        1: "Lokatsiyaga ruxsat berilmadi. Brauzer sozlamalaridan Location'ni yoqing.",
+        2: "Lokatsiyani aniqlab bo'lmadi. GPS/Wi-Fi yoqilganini tekshiring.",
+        3: "Lokatsiyani aniqlash vaqti tugadi. Qayta urinib ko'ring."
+    };
+
+    locationStatus.innerText = `❌ ${messages[err.code] || "Lokatsiya xatosi."}`;
+    locationBtn.classList.remove('bg-green-500');
+    locationBtn.classList.add('bg-blue-500');
+    locationBtn.innerText = "📍 Qayta lokatsiya olish";
+    console.error('Geolocation error:', err);
+}
+
 locationBtn.addEventListener('click', () => {
     if (!navigator.geolocation) {
-        locationStatus.innerText = "Geolokatsiya qo'llanilmaydi.";
+        locationStatus.innerText = "❌ Bu qurilmada geolokatsiya qo'llab-quvvatlanmaydi.";
         return;
     }
 
-    locationStatus.innerText = "⏳ Lokatsiya olinmoqda...";
+    stopLocationWatch();
+    locationSamples = [];
+    userLocation = null;
 
-    navigator.geolocation.getCurrentPosition(
-        pos => {
-            userLocation = {
-                lat: pos.coords.latitude,
-                lon: pos.coords.longitude
-            };
+    locationStatus.innerText = "⏳ GPS lokatsiya olinmoqda... Telefonni bir necha soniya qimirlatmang.";
+    locationBtn.disabled = true;
+    locationBtn.innerText = "⏳ Aniqlanmoqda...";
 
-            locationStatus.innerHTML = `✅ Lokatsiya olindi!
-                <br><span class="text-xs text-blue-600">
-                (${userLocation.lat.toFixed(4)}, ${userLocation.lon.toFixed(4)})
-                </span>`;
+    const startedAt = Date.now();
 
-            locationBtn.classList.replace("bg-blue-500", "bg-green-500");
-            locationBtn.innerText = "Manzil belgilandi";
-        },
-        err => {
-            locationStatus.innerText = "❌ Lokatsiya olinmadi.";
-            console.error(err);
+    const success = position => {
+        setBestLocation(position);
+        if (userLocation && locationSamples.length >= MIN_SAMPLES && userLocation.accuracy <= MAX_ACCEPTED_ACCURACY) {
+            locationBtn.disabled = false;
+        } else if (Date.now() - startedAt > LOCATION_TIMEOUT) {
+            stopLocationWatch();
+            locationBtn.disabled = false;
+            if (userLocation) {
+                locationStatus.innerHTML = `⚠️ GPS aniqligi yetarli emas: ±${Math.round(userLocation.accuracy)} m.<br><span class="text-xs">Ochiq joyga chiqing va qayta urinib ko'ring.</span>`;
+            } else {
+                locationStatus.innerText = "❌ Lokatsiya olinmadi. Qayta urinib ko'ring.";
+            }
         }
-    );
+    };
+
+    const error = err => {
+        locationBtn.disabled = false;
+        handleLocationError(err);
+    };
+
+    locationWatchId = navigator.geolocation.watchPosition(success, error, {
+        enableHighAccuracy: true,
+        timeout: LOCATION_TIMEOUT,
+        maximumAge: 0
+    });
 });
 
 // === 4. TELEGRAMGA YUBORISH ===
 async function sendTelegram() {
-    const name = document.getElementById('client-name').value;
+    const name = document.getElementById('client-name').value.trim();
     const phone = document.getElementById('client-phone').value;
 
-    // Telefon validatsiya
-    let cleanedPhone = phone.replace(/\s/g, "");
-    if (!cleanedPhone.match(/^\+998\d{9}$/)) {
+    const cleanedPhone = phone.replace(/\s/g, "");
+    if (!/^\+998\d{9}$/.test(cleanedPhone)) {
         alert("Telefon noto'g'ri: +998901234567");
         return;
     }
 
-    if (!userLocation) {
-        alert("Joylashuvni belgilang!");
+    if (!userLocation || userLocation.accuracy > MAX_ACCEPTED_ACCURACY) {
+        alert("❌ Aniq lokatsiya olinmadi. 'Lokatsiyani belgilash' tugmasini bosib, GPS aniqligini kuting.");
         return;
     }
 
-    // Buyurtma matni
     let message = `<b>📦 YANGI BUYURTMA!</b>\n\n`;
     message += `👤 <b>Mijoz:</b> ${name}\n`;
-    message += `📞 <b>Telefon:</b> ${cleanedPhone}\n\n`;
+    message += `📞 <b>Telefon:</b> ${cleanedPhone}\n`;
+    message += `📍 <b>GPS aniqligi:</b> ±${Math.round(userLocation.accuracy)} m\n\n`;
     message += `🛒 <b>Mahsulotlar:</b>\n`;
 
     cart.forEach((item, index) => {
@@ -167,21 +228,17 @@ async function sendTelegram() {
     message += `\n💰 <b>JAMI: ${document.getElementById('subtotal').innerText}</b>`;
 
     try {
-        // Matn yuborish
-        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        const messageResponse = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({
-                chat_id: CHAT_ID,
-                text: message,
-                parse_mode: "HTML"
-            })
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ chat_id: CHAT_ID, text: message, parse_mode: "HTML" })
         });
 
-        // Lokatsiya yuborish
-        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendLocation`, {
+        if (!messageResponse.ok) throw new Error('Telegram message yuborilmadi');
+
+        const locationResponse = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendLocation`, {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 chat_id: CHAT_ID,
                 latitude: userLocation.lat,
@@ -189,39 +246,39 @@ async function sendTelegram() {
             })
         });
 
-        alert("✅ Buyurtma qabul qilindi! Tez orada aloqaga chiqamiz!");
+        if (!locationResponse.ok) throw new Error('Telegram location yuborilmadi');
 
-        // Hammasini tozalash
+        alert("✅ Buyurtma qabul qilindi! Aniq GPS lokatsiya ham yuborildi.");
         clearAll();
 
     } catch (err) {
-        alert("❌ Xatolik: Internetni tekshiring!");
+        alert("❌ Buyurtma yuborishda xatolik. Internetni tekshiring va qayta urinib ko'ring.");
         console.error(err);
     }
 }
 
-// === 5. SAVATNI TO‘ZALASH FUNKSIYASI ===
+// === 5. SAVATNI TOZALASH ===
 function clearAll() {
+    stopLocationWatch();
     localStorage.removeItem('cart_v1');
     cart = [];
     renderCart();
 
     modal.classList.add('hidden');
     modal.classList.remove('flex');
-
     document.getElementById('telegram-form').reset();
 
-    locationBtn.classList.replace("bg-green-500", "bg-blue-500");
+    locationBtn.classList.remove('bg-green-500');
+    locationBtn.classList.add('bg-blue-500');
+    locationBtn.disabled = false;
     locationBtn.innerText = "📍 Joylashuvni belgilash";
+    locationStatus.innerText = "Manzil belgilanmadi";
     userLocation = null;
+    locationSamples = [];
 }
 
-// Savatni tozalash tugmasi
 document.getElementById('clear-cart').addEventListener('click', clearAll);
-
-// Boshlang'ich yuklash
 renderCart();
-
 
 // === TELEFON MASKASI ===
 const phoneInput = document.getElementById("client-phone");
